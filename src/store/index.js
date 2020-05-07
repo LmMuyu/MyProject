@@ -6,7 +6,9 @@ import mutations from "./mutations";
 
 Vue.use(Vuex);
 
-const state = {};
+const state = {
+  name: "123",
+};
 
 const store = new Vuex.Store({
   state,

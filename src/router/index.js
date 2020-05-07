@@ -3,11 +3,23 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-const routes = [];
+const Home = () => import("pages/home/Home.vue");
+
+const routes = [
+  {
+    path: "/",
+    redirect: "/home",
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: Home,
+  },
+];
 
 const router = new VueRouter({
   routes,
-  mode: "hash",
+  mode: "history",
 });
 
 export default router;

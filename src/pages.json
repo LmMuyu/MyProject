@@ -1,6 +1,6 @@
 {
 	"pages": [{
-		"path": "pages/index/index",
+		"path": "pages/home/Home",
 		"style": {
 			"navigationBarTitleText": "app"
 		}
@@ -10,6 +10,7 @@
 		"navigationBarTitleText": "uni-app",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8",
-		"onReachBottomDistance": true
+		"enablePullDownRefresh": true,
+		"backgroundTextStyle": "dark"
 	}
 }

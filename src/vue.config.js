@@ -7,7 +7,7 @@ module.exports = {
         components: "@/components",
         static: "@/static",
         common: "@/common",
-        views: "@/views",
+        pages: "@/pages",
         api: "@/api",
       },
     },
