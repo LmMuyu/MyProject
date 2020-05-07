@@ -1,11 +1,15 @@
-import Vue from 'vue'
-import App from './App'
+import Vue from "vue";
+import App from "./App";
+import store from "./store";
+import router from "./router";
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-App.mpType = 'app'
+App.mpType = "app";
 
 const app = new Vue({
-  ...App
-})
-app.$mount()
+  ...App,
+  store,
+  router,
+});
+app.$mount();
