@@ -4,7 +4,10 @@
 
 <script>
 export default {
-  name: "file"
+  name: "file",
+  data() {
+    return {};
+  }
 };
 </script>
 

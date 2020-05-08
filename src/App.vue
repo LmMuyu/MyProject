@@ -1,5 +1,12 @@
 <script>
-export default {};
+export default {
+  onLaunch: function() {},
+  onShow: function() {},
+  onHide: function() {},
+  onError(err) {
+    console.log(err);
+  }
+};
 </script>
 
 <style>
