@@ -12,5 +12,4 @@ export default {
 <style>
 /*每个页面公共css */
 @import "./static/css/normalize.css";
-@import "./uni.scss";
 </style>

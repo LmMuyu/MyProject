@@ -2,21 +2,54 @@
 	"pages": [{
 			"path": "pages/home/Home",
 			"style": {
-				"navigationBarTitleText": "Home"
+				"app-plus": {
+					"titleNView": {
+						"homeButton": true,
+						"searchInput": {
+							"backgroundColor": "#F5f4f2",
+							"borderRadius": "4px",
+							"placeholder": "搜索帖子",
+							"disabled": true,
+							"placeholderColor": "#ced6e0"
+						},
+						"buttons": [{
+								"type": "share"
+							},
+							{
+								"type": "menu"
+							}
+						]
+					}
+				}
 			}
 		},
 		{
 			"path": "pages/file/File",
-			"style": {
-				"navigationBarTitleText": "File"
-			}
+			"style": {}
 		}
 	],
+	"tabBar": {
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [{
+			"pagePath": "pages/home/Home",
+			"iconPath": "static/img/tabbar/home.png",
+			"selectedIconPath": "static/img/tabbar/home%20(1).png",
+			"text": ""
+		}, {
+			"pagePath": "pages/file/File",
+			"iconPath": "static/img/tabbar/我的.png",
+			"selectedIconPath": "static/img/tabbar/我的2.png",
+			"text": ""
+		}]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8",
+		"navigationBarTitleText": "社区交友",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF",
 		"enablePullDownRefresh": true,
 		"backgroundTextStyle": "dark"
 	}

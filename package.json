@@ -42,6 +42,7 @@
     "@dcloudio/uni-stat": "^2.0.0-26920200424005",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
+    "fastclick": "^1.0.6",
     "flyio": "^0.6.2",
     "regenerator-runtime": "^0.12.1",
     "vue": "^2.6.11",
