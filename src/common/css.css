@@ -1,0 +1,33 @@
+.flex {
+  display: flex;
+}
+
+.flex-j-c {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-a-c {
+  display: flex;
+  align-items: center;
+}
+
+.flex-ja-c {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.font-size {
+  font-size: 32rpx;
+}
+.margin-top{
+	margin-top: 16rpx;
+}
+.text-color{
+	color: #6D6C67;
+}
+
+.size-bole{
+	font-weight: bold;
+}

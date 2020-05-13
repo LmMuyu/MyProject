@@ -1,5 +1,5 @@
 <template>
-  <view>
+  <view class="ispostmodule">
     <view class="postmodule">
       <view @click="openSpace">
         <image src="static/img/tabbar/home.png" class="img-to" />
@@ -9,10 +9,15 @@
         <view>2002-1.-4555</view>
       </view>
       <view class="guanzhu">
-        <span>关注</span>
+        <span
+          @click="opentTion"
+          class="animate__animated animate__backInLeft"
+          :style="{'background':attention? '#55efc4':'#70a1ff'} "
+        >{{attention ? "已关注":"关注"}}</span>
       </view>
     </view>
-    <view class="img-tu">
+    <view class="content">
+      <span class="text">123456789ldlalwdlalwdlawd</span>
       <img
         src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg"
         alt
@@ -29,16 +34,32 @@
 
 <script>
 export default {
+  name: "PostModule",
+  props: {
+    dataInfo: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
-    return {};
+    return {
+      attention: false,
+      Info: this.dataInfos
+    };
   },
   methods: {
-    openSpace() {}
+    openSpace() {},
+    opentTion() {
+      this.attention = this.attention === false ? true : false;
+    }
   }
 };
 </script>
 
-<style  scoped>
+<style scoped>
+.ispostmodule {
+  border-bottom: 1rpx solid #dcdde1;
+}
 .img-to {
   width: 70rpx;
   height: 70rpx;
@@ -72,13 +93,13 @@ export default {
 .guanzhu > span {
   margin-right: 24rpx;
   color: #ffffff;
-  background: #70a1ff;
   padding: 6rpx 8rpx;
   border-radius: 6rpx;
   font-size: 32rpx;
 }
-.img-tu img {
+.content img {
   width: 100%;
+  border-radius: 6rpx;
   height: 300rpx;
 }
 .gong-neng {
@@ -89,6 +110,9 @@ export default {
 }
 .gong-neng > view {
   margin-right: 32rpx;
+}
+.text {
+  font-size: 32rpx;
 }
 .iconfont {
   font-family: "iconfont" !important;

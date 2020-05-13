@@ -1,6 +1,6 @@
 <template>
   <view>
-    <PostModule v-for="(item, index) in 10" :key="index" />
+    <PostModule v-for="(item, index) in datanum" :key="index"  />
   </view>
 </template>
 
@@ -11,6 +11,16 @@ export default {
   name: "HomePostShow",
   components: {
     PostModule
+  },
+  props: {
+    list: {
+      type: Array,
+      default: () => []
+    },
+    datanum: {
+      type: Number,
+      default: 0
+    }
   }
 };
 </script>

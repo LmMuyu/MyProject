@@ -3,14 +3,18 @@
 			"path": "pages/home/Home",
 			"style": {
 				"app-plus": {
+					"pullToRefresh": {
+						"color": "#ff7675",
+						"offset": "40px"
+					},
 					"titleNView": {
 						"homeButton": true,
 						"searchInput": {
-							"backgroundColor": "#F5f4f2",
+							"backgroundColor": "#F5F4F2",
 							"borderRadius": "4px",
 							"placeholder": "搜索帖子",
 							"disabled": true,
-							"placeholderColor": "#ced6e0"
+							"placeholderColor": "#6D6C67"
 						},
 						"buttons": [{
 								"type": "share"
@@ -26,6 +30,31 @@
 		{
 			"path": "pages/file/File",
 			"style": {}
+		},
+		{
+			"path": "pages/searchfor/SearchFor",
+			"style": {
+				"app-plus": {
+					"animationType": "slide-in-right",
+					"animationDuration": 300,
+					"pullToRefresh": {
+						"color": "#ff7675",
+						"offset": "40px"
+					},
+					"titleNView": {
+						"homeButton": true,
+						"searchInput": {
+							"backgroundColor": "#F5F4F2",
+							"borderRadius": "4px",
+							"placeholder": "搜索帖子",
+							"disabled": false,
+							"placeholderColor": "#6D6C67",
+							"align": "left",
+							"autoFocus": true
+						}
+					}
+				}
+			}
 		}
 	],
 	"tabBar": {
@@ -40,8 +69,8 @@
 			"text": ""
 		}, {
 			"pagePath": "pages/file/File",
-			"iconPath": "static/img/tabbar/我的.png",
-			"selectedIconPath": "static/img/tabbar/我的2.png",
+			"iconPath": "static/img/tabbar/file.png",
+			"selectedIconPath": "static/img/tabbar/file2.png",
 			"text": ""
 		}]
 	},
