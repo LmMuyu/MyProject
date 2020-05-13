@@ -21,13 +21,28 @@
 .font-size {
   font-size: 32rpx;
 }
-.margin-top{
-	margin-top: 16rpx;
-}
-.text-color{
-	color: #6D6C67;
+
+.margin-top {
+  margin-top: 16rpx;
 }
 
-.size-bole{
-	font-weight: bold;
+.text-color {
+  color: #6D6C67;
+}
+
+.size-bole {
+  font-weight: bold;
+}
+
+.flex-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.border-radius {
+  border-radius: 8rpx;
+}
+
+.color-c {
+  color: #ecf0f1;
 }

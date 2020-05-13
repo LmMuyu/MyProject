@@ -1,6 +1,6 @@
 <template>
   <view>
-    <PostModule v-for="(item, index) in datanum" :key="index"  />
+    <PostModule v-for="(item, index) in list" :key="index" :dataInfo="item"  />
   </view>
 </template>
 

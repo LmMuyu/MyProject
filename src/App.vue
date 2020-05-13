@@ -16,12 +16,12 @@ export default {
 @import "./common/css.css";
 @font-face {
   font-family: "iconfont"; /* project id 1810160 */
-  src: url("//at.alicdn.com/t/font_1810160_pgjvpvbvdob.eot");
-  src: url("//at.alicdn.com/t/font_1810160_pgjvpvbvdob.eot?#iefix")
+  src: url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.eot");
+  src: url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.eot?#iefix")
       format("embedded-opentype"),
-    url("//at.alicdn.com/t/font_1810160_pgjvpvbvdob.woff2") format("woff2"),
-    url("//at.alicdn.com/t/font_1810160_pgjvpvbvdob.woff") format("woff"),
-    url("//at.alicdn.com/t/font_1810160_pgjvpvbvdob.ttf") format("truetype"),
-    url("//at.alicdn.com/t/font_1810160_pgjvpvbvdob.svg#iconfont") format("svg");
+    url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.woff2") format("woff2"),
+    url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.woff") format("woff"),
+    url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.ttf") format("truetype"),
+    url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.svg#iconfont") format("svg");
 }
 </style>

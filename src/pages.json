@@ -4,11 +4,9 @@
 			"style": {
 				"app-plus": {
 					"pullToRefresh": {
-						"color": "#ff7675",
-						"offset": "40px"
+						"color": "#ff7675"
 					},
 					"titleNView": {
-						"homeButton": true,
 						"searchInput": {
 							"backgroundColor": "#F5F4F2",
 							"borderRadius": "4px",
@@ -35,23 +33,18 @@
 			"path": "pages/searchfor/SearchFor",
 			"style": {
 				"app-plus": {
-					"animationType": "slide-in-right",
-					"animationDuration": 300,
-					"pullToRefresh": {
-						"color": "#ff7675",
-						"offset": "40px"
-					},
-					"titleNView": {
-						"homeButton": true,
-						"searchInput": {
-							"backgroundColor": "#F5F4F2",
-							"borderRadius": "4px",
-							"placeholder": "搜索帖子",
-							"disabled": false,
-							"placeholderColor": "#6D6C67",
-							"align": "left",
-							"autoFocus": true
-						}
+					"animationType": "zoom-fade-out",
+					"animationDuration": 150
+				},
+				"navigationStyle": "custom",
+				"titleNView": {
+					"searchInput": {
+						"backgroundColor": "#F5F4F2",
+						"borderRadius": "4px",
+						"placeholder": "搜索帖子",
+						"placeholderColor": "#6D6C67",
+						"align": "left",
+						"autoFocus": true
 					}
 				}
 			}
