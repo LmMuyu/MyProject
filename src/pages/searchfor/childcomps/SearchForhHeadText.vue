@@ -1,5 +1,5 @@
 <template>
-	<view class="headtext font-size flex margin-top text-color"><span>历史记录</span></view>
+	<view class="headtext font-size  flex margin-top text-color"><span>历史记录</span></view>
 </template>
 
 <script>
@@ -8,4 +8,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+	.font-size{
+		font-size: 36rpx;
+	}
+</style>

@@ -14,6 +14,8 @@ export default {
 @import "./static/css/normalize.css";
 @import "./static/css/animate.css";
 @import "./common/css.css";
+@import './uni.scss'
+//图标
 @font-face {
   font-family: "iconfont"; /* project id 1810160 */
   src: url("https://at.alicdn.com/t/font_1810160_pgjvpvbvdob.eot");

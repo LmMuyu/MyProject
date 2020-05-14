@@ -14,12 +14,13 @@
 							"disabled": true,
 							"placeholderColor": "#6D6C67"
 						},
-						"buttons": [{
-								"type": "share"
-							},
-							{
-								"type": "menu"
-							}
+						"buttons": [
+							// {
+							// 	"color":"#333333",
+							// 	"colorPressed":"#FD597C",
+							// 	"float":"right",
+							// 	"text":"\ue740"
+							// }
 						]
 					}
 				}

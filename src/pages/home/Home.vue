@@ -27,6 +27,7 @@
                 <HomeUpLoading :text="text" />
               </view>
             </template>
+            <!-- 有数据显示 -->
 
             <!-- 没数据显示 -->
             <template v-else>
@@ -34,6 +35,7 @@
                 <HomeNullData />
               </view>
             </template>
+            <!-- 没数据显示 -->
           </scroll-view>
         </swiper-item>
       </swiper>
@@ -157,7 +159,7 @@ export default {
     homePlateData() {
       homePlateData("featured")
         .then(vlaue => {
-          console.log(vlaue);
+          vlaue
         })
         .catch(err => {
           err;
