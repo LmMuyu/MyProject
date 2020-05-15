@@ -46,3 +46,7 @@
 .color-c {
   color: #ecf0f1;
 }
+.position-z{
+	position: relative;
+	z-index: 999;
+}

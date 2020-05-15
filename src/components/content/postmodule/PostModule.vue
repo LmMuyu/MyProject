@@ -42,10 +42,10 @@ export default {
 	},
 	filters: {
 		timestamp(val) {
-			let d1 = moment(Number(val))
-				.format('YYYY-MM-DD')
-				.split('-');
-			return d1;
+			let date = Date.now()
+			let releaseTime = moment(Number(val)).format('YYYY-MM-DD').split("-")
+			let currentTime = moment(Number(date)).format('YYYY-MM-DD')
+			return moment(releaseTime).from(currentTime);
 		}
 	},
 	mounted() {},
@@ -61,13 +61,13 @@ export default {
 
 <style lang="scss" scoped>
 .ispostmodule {
-	border-bottom: 1rpx solid #dcdde1;
+	border-bottom: 1rpx solid $uni-border-color;
 }
 .img-to {
 	width: 70rpx;
 	height: 70rpx;
 	border-radius: 50%;
-	background: red;
+	background-color: $uni-bg-color-mask;
 }
 .postmodule {
 	display: flex;
@@ -81,7 +81,7 @@ export default {
 }
 .xinxi > view:nth-child(1) {
 	font-weight: bold;
-	font-size: 32rpx;
+	font-size: $uni-font-size-lg;
 }
 
 .xinxi > view:nth-child(2) {
@@ -98,7 +98,7 @@ export default {
 	color: #ffffff;
 	padding: 6rpx 8rpx;
 	border-radius: 6rpx;
-	font-size: 32rpx;
+	font-size: $uni-font-size-lg;
 }
 .content {
 	margin-top: 15rpx;
@@ -118,8 +118,8 @@ export default {
 	margin-right: 50rpx;
 }
 .text {
-	font-size: 28rpx;
-	color: #2d3436;
+	font-size: $uni-font-size-base;
+	color: $uni-text-color;
 }
 .iconfont {
 	font-family: 'iconfont' !important;

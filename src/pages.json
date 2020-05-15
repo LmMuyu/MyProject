@@ -14,14 +14,13 @@
 							"disabled": true,
 							"placeholderColor": "#6D6C67"
 						},
-						"buttons": [
-							// {
-							// 	"color":"#333333",
-							// 	"colorPressed":"#FD597C",
-							// 	"float":"right",
-							// 	"text":"\ue740"
-							// }
-						]
+						"buttons": [{
+							"color": "#333333",
+							"colorPressed": "#FD597C",
+							"fontSrc": "static/img/font_1810160_nhg80gt3pdi/iconfont.ttf",
+							"float": "right",
+							"text": "\ue606"
+						}]
 					}
 				}
 			}
@@ -33,6 +32,7 @@
 		{
 			"path": "pages/searchfor/SearchFor",
 			"style": {
+				"enablePullDownRefresh": false,
 				"app-plus": {
 					"animationType": "zoom-fade-out",
 					"animationDuration": 150
@@ -48,6 +48,13 @@
 						"autoFocus": true
 					}
 				}
+			}
+		},
+		{
+			"path": "pages/releasepage/ReleasePage",
+			"style": {
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
 			}
 		}
 	],
