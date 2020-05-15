@@ -1,15 +1,17 @@
 <template>
 	<view class="releasepage">
-		<!--导航栏-->
-		<UniNavBar class="margin-top" left-icon="back" left-text="返回" right-text="发布" @clickLeft="onBack" title="发布页" />
-		<!--内容输入区-->
-		<view class="uni-common-mt" style="background:#FFF; padding:20rpx;">
-			<textarea v-model="content" placeholder-class="textarea-placeholder" class="text" placeholder="说说一句话吧~~~" auto-height focus></textarea>
-		</view>
-		<!-- 图片展示 -->
-		<view><ReleasePageImageShow :imagelist="image" /></view>
-		<!--底部功能栏-->
-		<view><ReleasePageFunction class="functionbar" @onUploadImage="onUpimg" /></view>
+		<scroll-view scroll-y :style="`height:${height}`">
+			<!--导航栏-->
+			<UniNavBar class="margin-top scroll-height" left-icon="back" left-text="返回" right-text="发布" @clickLeft="onBack" title="发布页" />
+			<!--内容输入区-->
+			<view class="uni-common-mt" style="background:#FFF; padding:20rpx;">
+				<textarea v-model="content" placeholder-class="textarea-placeholder" class="text" placeholder="说说一句话吧~~~" auto-height focus></textarea>
+			</view>
+			<!-- 图片展示 -->
+			<view><ReleasePageImageShow :imagelist="image" /></view>
+			<!--底部功能栏-->
+			<view><ReleasePageFunction class="functionbar scroll-height" @onUploadImage="onUpimg" /></view>
+		</scroll-view>
 	</view>
 </template>
 
@@ -29,8 +31,13 @@ export default {
 	data() {
 		return {
 			content: '',
-			image: []
+			image: [],
+			height: 0
 		};
+	},
+	mounted() {
+		//获取视高
+		this.xiTong();
 	},
 	methods: {
 		onBack() {
@@ -54,6 +61,14 @@ export default {
 					}
 				}
 			});
+		},
+		//获取视高
+		xiTong() {
+			uni.getSystemInfo({
+				success: res => {
+					this.height = res.windowHeight  + 'px';
+				}
+			});
 		}
 	}
 };
@@ -65,14 +80,19 @@ export default {
 	font-size: $uni-font-size-base;
 	width: 100%;
 	height: 800rpx;
+	padding: 0 0 300rpx 0;
 }
 .functionbar {
 	position: fixed;
 	bottom: 0;
 	z-index: 99;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
+	box-shadow:  0 -1rpx 1rpx $uni-bg-color-mask;
 }
 .textarea-placeholder {
 	height: 100%;
+}
+.scroll-height{
+	height: 100rpx;
 }
 </style>

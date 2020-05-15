@@ -1,11 +1,9 @@
 <template>
 	<view class="imageshow flex">
-		<scroll-view>
 			<view v-for="(item, index) in imagelist" :key="index" class="flex">
 				<image class="image" :src="item" mode="aspectFill" />
 				<view class="iconfont position">&#xe6be;</view>
 			</view>
-		</scroll-view>
 	</view>
 </template>
 
@@ -19,18 +17,10 @@ export default {
 		}
 	},
 	mounted() {
-		//获取视高
-		this.xiTong()
+	
 	},
 	methods: {
-		//获取视高
-		xiTong() {
-			uni.getSystemInfo({
-				success: res => {
-					console.log(res);
-				}
-			});
-		}
+	
 	}
 };
 </script>

@@ -56,6 +56,13 @@
 				"enablePullDownRefresh": false,
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path":"pages/community/Community",
+			"style":{
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"tabBar": {
@@ -72,6 +79,12 @@
 			"pagePath": "pages/file/File",
 			"iconPath": "static/img/tabbar/file.png",
 			"selectedIconPath": "static/img/tabbar/file2.png",
+			"text": ""
+		},
+		{
+			"pagePath": "pages/community/Community",
+			"iconPath": "static/img/tabbar/community.png",
+			"selectedIconPath": "static/img/tabbar/community1.png",
 			"text": ""
 		}]
 	},

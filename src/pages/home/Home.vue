@@ -10,7 +10,7 @@
 
 		<!--start 滑屏 article-->
 		<article>
-			<swiper :current="TabCur" :style="`height:${height}`" @change="change" class="swiper-ml">
+			<swiper :current="TabCur" :style="`height:${height}`" @change="change" class="swiper-ml ">
 				<swiper-item v-for="(item, index) in tabList" :key="index" class="scrollY">
 					<!-- 有数据显示 -->
 					<template v-if="!item.data.length == 0">
