@@ -52,7 +52,7 @@ export default {
 		this.systemMessage();
 	},
 	methods: {
-		//搜索事件
+		//搜索
 		onSearch() {
 			//收起软键盘
 			uni.hideKeyboard();
@@ -138,8 +138,9 @@ export default {
 			//搜索框为为空时调用此函数
 			this.onSearchPrompt();
 		}
-	}
+	},
+	
 };
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped></style>

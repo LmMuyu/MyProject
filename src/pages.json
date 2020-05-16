@@ -58,10 +58,16 @@
 			}
 		},
 		{
-			"path":"pages/community/Community",
-			"style":{
-				"enablePullDownRefresh": false,
+			"path": "pages/community/Community",
+			"style": {
 				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/dateil/Dateil",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
 			}
 		}
 	],
@@ -71,22 +77,23 @@
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
-			"pagePath": "pages/home/Home",
-			"iconPath": "static/img/tabbar/home.png",
-			"selectedIconPath": "static/img/tabbar/home%20(1).png",
-			"text": ""
-		}, {
-			"pagePath": "pages/file/File",
-			"iconPath": "static/img/tabbar/file.png",
-			"selectedIconPath": "static/img/tabbar/file2.png",
-			"text": ""
-		},
-		{
-			"pagePath": "pages/community/Community",
-			"iconPath": "static/img/tabbar/community.png",
-			"selectedIconPath": "static/img/tabbar/community1.png",
-			"text": ""
-		}]
+				"pagePath": "pages/home/Home",
+				"iconPath": "static/img/tabbar/home.png",
+				"selectedIconPath": "static/img/tabbar/home%20(1).png",
+				"text": ""
+			}, {
+				"pagePath": "pages/file/File",
+				"iconPath": "static/img/tabbar/file.png",
+				"selectedIconPath": "static/img/tabbar/file2.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/community/Community",
+				"iconPath": "static/img/tabbar/community.png",
+				"selectedIconPath": "static/img/tabbar/community1.png",
+				"text": ""
+			}
+		]
 	},
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -2,7 +2,7 @@
 	<view class="imageshow flex">
 			<view v-for="(item, index) in imagelist" :key="index" class="flex">
 				<image class="image" :src="item" mode="aspectFill" />
-				<view class="iconfont position">&#xe6be;</view>
+				<!-- <view class="iconfont position">&#xe6be;</view> -->
 			</view>
 	</view>
 </template>
@@ -29,10 +29,11 @@ export default {
 .imageshow {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-between;
 }
 .image {
-	max-width: 350rpx;
-	padding: $uni-spacing-row-sm;
+	width: 220rpx;
+	max-height: 250rpx;
 }
 .iconfont {
 	font-family: 'iconfont' !important;
