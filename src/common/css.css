@@ -1,4 +1,4 @@
-.flex {
+.flexbox {
   display: flex;
 }
 
@@ -90,4 +90,10 @@
 }
 .border-b{
   border-bottom: 1rpx solid #c8c7cc;
+}
+.ma-left-au{
+  margin-left: auto;
+}
+.p-tb-16{
+  padding: 16rpx 0;
 }

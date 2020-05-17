@@ -38,6 +38,24 @@
 			}
 		},
 		{
+			"path": "pages/install/childcomps/InstallPassword",
+			"style": {
+				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/install/childcomps/InstaillMailbox",
+			"style": {
+				"navigationBarTitleText": "绑定邮箱"
+			}
+		},
+		{
+			"path": "pages/install/childcomps/InstaillUserInfo",
+			"style": {
+				"navigationBarTitleText": "编辑信息"
+			}
+		},
+		{
 			"path": "pages/searchfor/SearchFor",
 			"style": {
 				"enablePullDownRefresh": false,

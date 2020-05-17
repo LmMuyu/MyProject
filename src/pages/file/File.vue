@@ -1,14 +1,7 @@
 <template>
   <view>
     <!--导航栏-->
-    <uni-nav-bar
-      left-icon="back"
-      class="navbar"
-      left-text="返回"
-      right-text="设置"
-      title="我的"
-      @openSetup="openSetup"
-    ></uni-nav-bar>
+    <uni-nav-bar class="navbar" right-text="设置" title="我的" @openSetup="openSetup" />
     <!--用户信息-->
     <FileUserInfo />
     <!--用户帖子详细信息-->
@@ -25,8 +18,8 @@ import uniNavBar from "components/content/navbar/uni-nav-bar/uni-nav-bar";
 
 import FileUserInfo from "./childcomps/FileUserInfo";
 import FilePostInfo from "./childcomps/FilePostInfo";
-import FileBilling from "./childcomps/FileBilling";
 import FileFeatures from "./childcomps/FileFeatures";
+import FileBilling from "./childcomps/FileBilling";
 
 export default {
   name: "file",
