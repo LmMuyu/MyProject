@@ -13,6 +13,8 @@ export default {};
 
 <style lang="scss" scoped>
 .filter {
-  filter: blur(10px);
+  filter: blur(8px);
+  width: 100%;
+  height: 450rpx;
 }
 </style>

@@ -27,7 +27,15 @@
 		},
 		{
 			"path": "pages/file/File",
-			"style": {}
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/install/Install",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
 		},
 		{
 			"path": "pages/searchfor/SearchFor",
@@ -66,8 +74,18 @@
 		{
 			"path": "pages/dateil/Dateil",
 			"style": {
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": false
+				"navigationBarTitleText": "话题",
+				"navigationBarShadow": {
+					"colorType": "orange"
+				},
+				"app-plus": {
+					"titleNView": {
+						"type": "transparent",
+						"buttons": [{
+							"type": "menu"
+						}]
+					}
+				}
 			}
 		}
 	],
@@ -81,16 +99,17 @@
 				"iconPath": "static/img/tabbar/home.png",
 				"selectedIconPath": "static/img/tabbar/home%20(1).png",
 				"text": ""
-			}, {
-				"pagePath": "pages/file/File",
-				"iconPath": "static/img/tabbar/file.png",
-				"selectedIconPath": "static/img/tabbar/file2.png",
-				"text": ""
 			},
 			{
 				"pagePath": "pages/community/Community",
 				"iconPath": "static/img/tabbar/community.png",
 				"selectedIconPath": "static/img/tabbar/community1.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/file/File",
+				"iconPath": "static/img/tabbar/file.png",
+				"selectedIconPath": "static/img/tabbar/file2.png",
 				"text": ""
 			}
 		]

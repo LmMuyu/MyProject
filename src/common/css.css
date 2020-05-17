@@ -22,6 +22,14 @@
   font-size: 28rpx;
 }
 
+.ma-l {
+  margin-left: 20rpx;
+}
+
+.mar{
+  margin: 20rpx;
+}
+
 .margin-top {
   margin-top: 16rpx;
 }
@@ -46,11 +54,40 @@
 .color-c {
   color: #ecf0f1;
 }
-.position-z{
-	position: relative;
-	z-index: 999;
+
+.position-z {
+  position: relative;
+  z-index: 999;
 }
 
-.siae{
+.siae {
   font-size: 32rpx;
+}
+
+.text-color-9 {
+  color: #999;
+}
+
+.text-color-c {
+  color: #c0c0c0;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.size{
+  font-size: 32rpx;
+}
+.pa-tb-2{
+  padding: 32rpx;
+}
+.border-b{
+  border-bottom: 1rpx solid #c8c7cc;
 }
