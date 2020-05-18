@@ -13,7 +13,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  onBackPress() {
+    //点击左上角返回收起软键盘
+    uni.hideKeyboard();
+  }
+};
 </script>
 
 <style lang="scss" scoped>

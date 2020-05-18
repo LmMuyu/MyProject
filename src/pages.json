@@ -17,7 +17,7 @@
 						"buttons": [{
 							"color": "#333333",
 							"colorPressed": "#FD597C",
-							"fontSrc": "static/img/font_1810160_nhg80gt3pdi/iconfont.ttf",
+							"fontSrc": "./static/img/font_1810160_zboo91g73g/iconfont.ttf",
 							"float": "right",
 							"text": "\ue606"
 						}]
@@ -105,6 +105,35 @@
 					}
 				}
 			}
+		},
+		{
+			"path": "pages/information/Information",
+			"style": {
+				"navigationBarTitleText": "信息",
+				"navigationBarShadow": {
+					"colorType": "blue"
+				},
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+								"color": "#333333",
+								"colorPressed": "#34495e",
+								"fontSrc": "static/img/font_1810160_zboo91g73g/iconfont.ttf",
+								"float": "right",
+								"text": "\ue6ef"
+							},
+							{
+								"color": "#333333",
+								"colorPressed": "#34495e",
+								"fontSrc": "static/img/font_1810160_zboo91g73g/iconfont.ttf",
+								"float": "left",
+								"text": "\ue688",
+								"fontSize":"32"
+							}
+						]
+					}
+				}
+			}
 		}
 	],
 	"tabBar": {
@@ -128,6 +157,12 @@
 				"pagePath": "pages/file/File",
 				"iconPath": "static/img/tabbar/file.png",
 				"selectedIconPath": "static/img/tabbar/file2.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/information/Information",
+				"iconPath": "./static/img/tabbar/information.png",
+				"selectedIconPath": "static/img/tabbar/information1.png",
 				"text": ""
 			}
 		]

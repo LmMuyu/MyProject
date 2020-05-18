@@ -11,7 +11,6 @@ export default {
 
 <style>
 /*每个页面公共css */
-
 @import "./uni.scss";
 @import "./common/css.css";
 @import "./static/css/animate.css";
