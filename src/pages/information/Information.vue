@@ -1,7 +1,7 @@
 <template>
   <view id="info">
     <!--信息-->
-    <InformationBuddyInfo v-for="(item, index) in 5" :key="index" />
+    <InformationBuddyInfo @click.native="openChat" v-for="(item, index) in 5" :key="index" />
     <!--顶部弹出层-->
     <uni-popup ref="popup" type="top">
       <view class="flex-ja-c fl-dr size">
@@ -43,10 +43,26 @@ export default {
     //点击弹出框内的文字来关闭弹出框
     close() {
       this.$refs.popup.close();
+    },
+    //打开聊天页
+    openChat() {
+      uni.navigateTo({
+        url: "../chat/Chat",
+        animationType: "pop-in",
+        animationDuration: 150
+      });
+    },
+    //打开好友页
+    openBuddy() {
+      uni.navigateTo({
+        url: "../buddy/Buddy",
+        animationType: "slide-in-left",
+        animationDuration: 150
+      });
     }
   },
   onNavigationBarButtonTap({ index }) {
-    index == 0 ? this.openPopup() : false;
+    index == 0 ? this.openPopup() : this.openBuddy();
   }
 };
 </script>

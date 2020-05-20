@@ -129,10 +129,10 @@ export default {
     },
     onClickRight() {
       this.$emit("clickRight");
-		},
-		openSetup(){
-			this.$emit("openSetup")
-		}
+    },
+    openSetup() {
+      this.$emit("openSetup");
+    }
   }
 };
 </script>

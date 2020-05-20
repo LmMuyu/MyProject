@@ -58,4 +58,7 @@ image {
   display: flex;
   justify-content: space-between;
 }
+view:nth-child(1){
+  margin-top: 20rpx;;
+}
 </style>

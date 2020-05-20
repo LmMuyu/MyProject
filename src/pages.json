@@ -128,11 +128,25 @@
 								"fontSrc": "static/img/font_1810160_zboo91g73g/iconfont.ttf",
 								"float": "left",
 								"text": "\ue688",
-								"fontSize":"32"
+								"fontSize": "32"
 							}
 						]
 					}
 				}
+			}
+		},
+		{
+			"path": "pages/chat/Chat",
+			"style": {
+				"navigationBarTitleText": "聊天",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/buddy/Buddy",
+			"style": {
+				"navigationBarTitleText": "好友",
+				"navigationStyle": "custom"
 			}
 		}
 	],

@@ -6,7 +6,7 @@
       v-for="(item, index) in tablist"
       :key="index"
       @click="tabIndex(index)"
-    >{{item.name}}</view>
+    >{{item.name}} {{item.info | numGulu}}</view>
   </view>
 </template>
 
@@ -23,6 +23,19 @@ export default {
       activeindex: 0
     };
   },
+  filters:{
+    numGulu(vlaue){
+      let num = Number(vlaue)
+
+      if (num === 0) {
+        return ""
+      }else if(num>=99){
+        return 99+"+"
+      }else{
+        return num
+      }
+    }
+  },
   methods: {
     tabIndex(i) {
       this.activeindex = i;
@@ -35,6 +48,7 @@ export default {
 <style lang="scss" scoped>
 .tba {
   padding: 16rpx 0;
+  box-shadow: -1rpx 0 1rpx $uni-border-color;
 }
 .tba > view {
   flex: 1;
