@@ -148,6 +148,35 @@
 				"navigationBarTitleText": "好友",
 				"navigationStyle": "custom"
 			}
+		},
+		{
+			"path": "pages/login/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/login/reg/reg",
+			"style": {
+				"navigationBarTitleText": "注册",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/login/pwd/pwd",
+			"style": {
+				"navigationBarTitleText": "找回密码",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/postdetail/PostDetail",
+			"style": {
+				"navigationBarTitleText": "帖子详情",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+			}
 		}
 	],
 	"tabBar": {
@@ -168,15 +197,15 @@
 				"text": ""
 			},
 			{
-				"pagePath": "pages/file/File",
-				"iconPath": "static/img/tabbar/file.png",
-				"selectedIconPath": "static/img/tabbar/file2.png",
-				"text": ""
-			},
-			{
 				"pagePath": "pages/information/Information",
 				"iconPath": "./static/img/tabbar/information.png",
 				"selectedIconPath": "static/img/tabbar/information1.png",
+				"text": ""
+			},
+			{
+				"pagePath": "pages/file/File",
+				"iconPath": "static/img/tabbar/file.png",
+				"selectedIconPath": "static/img/tabbar/file2.png",
 				"text": ""
 			}
 		]

@@ -2,6 +2,11 @@ import { request } from "./request";
 
 export function homePlateData(plate) {
   return request({
-    url: `/home/${plate}`,
+    method: "post",
+    url: plate,
+    data: {
+      name: "张三",
+      age: 17,
+    },
   });
 }

@@ -2,14 +2,14 @@ import Vue from "vue";
 import App from "./App";
 import store from "./store";
 import router from "./router";
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-
+import moment from "moment";
+import "moment/locale/zh-cn";
 
 Vue.config.productionTip = false;
 Vue.prototype.$bus = new Vue();
 Vue.prototype.moment = moment;
-moment.locale('zh-cn');
+Vue.prototype.$store = store;
+moment.locale("zh-cn");
 
 App.mpType = "app";
 
@@ -18,8 +18,8 @@ App.mpType = "app";
 // FastClick.attach(document.body);
 
 const app = new Vue({
-	...App,
-	store,
-	router,
+  ...App,
+  store,
+  router,
 });
 app.$mount();

@@ -8,6 +8,12 @@ Vue.use(Vuex);
 
 const state = {
   name: "123",
+  /**
+   * 是否需要强制登录
+   */
+  forcedLogin: false,
+  hasLogin: false,
+  userName: "",
 };
 
 const store = new Vuex.Store({

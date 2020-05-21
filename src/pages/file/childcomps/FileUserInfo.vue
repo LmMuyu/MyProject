@@ -13,7 +13,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -30,9 +32,8 @@ export default {};
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
 }
-.text>text:nth-last-child(1){
+.text > text:nth-last-child(1) {
   color: $uni-text-color-grey;
 }
 .iconfont {

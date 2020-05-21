@@ -3,8 +3,8 @@
     <!--导航栏-->
     <uni-nav-bar class="navbar" right-text="设置" title="我的" @openSetup="openSetup" />
     <!--用户信息-->
-    <FileUserInfo />
-    <!--用户帖子详细信息-->
+    <FileUserInfo @click.native="openLogin" />
+    <!--用户状态详细信息-->
     <FilePostInfo :info="listpost" />
     <!--广告-->
     <FileBilling class="billing" />
@@ -46,6 +46,14 @@ export default {
         url: "../install/Install",
         animationType: "pop-in",
         animationDuration: 150
+      });
+    },
+    //打开登录
+    openLogin() {
+      uni.navigateTo({
+        url: "../login/login/login",
+        animationType: "none",
+        animationDuration: 200
       });
     }
   }
