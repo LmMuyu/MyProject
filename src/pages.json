@@ -173,9 +173,8 @@
 		{
 			"path": "pages/postdetail/PostDetail",
 			"style": {
-				"navigationBarTitleText": "帖子详情",
-				"enablePullDownRefresh": false,
-				"navigationStyle": "custom"
+				"navigationBarTitleText": "详情页",
+				"enablePullDownRefresh": false
 			}
 		}
 	],

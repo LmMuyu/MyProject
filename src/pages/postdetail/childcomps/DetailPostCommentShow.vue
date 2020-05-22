@@ -1,27 +1,43 @@
 <template>
   <view>
-    <!--头部作者信息-->
-    <DetailPostInfo class="headinfo" />
-    <!--最新评论-->
-    <DetailPostCommentShow />
-    <!--发评论-->
-    <DetailPostBottomInput class="input" />
+    <!--回复-->
+    <DetailPostComment :reviewMsg="review" @openPopup="openPopup" />
+    <!--全部回复-->
+    <uni-popup ref="popup" type="bottom" class="uni_popup">
+      <view :style="`height:${Height}`" class="bottomoPopup">
+        <i class="iconfont" @click="closePopup">&#xe607;</i>
+        <scroll-view scroll-y :style="`height:${scrollH}`">
+          <DetailPostReply
+            v-for="(item, index) in review.reviewLess"
+            :key="index"
+            :reviewMsg="item"
+          />
+        </scroll-view>
+      </view>
+    </uni-popup>
   </view>
 </template>
 
 <script>
-import DetailPostCommentShow from "./childcomps/DetailPostCommentShow";
-import DetailPostInfo from "./childcomps/DetailPostInfo";
-import DetailPostBottomInput from "./childcomps/DetailPostBottomInput";
+import uniPopupMessage from "components/content/popup/uni-popup/uni-popup-message.vue";
+import uniPopupDialog from "components/content/popup/uni-popup/uni-popup-dialog.vue";
+import uniPopup from "components/content/popup/uni-popup/uni-popup.vue";
+
+import DetailPostComment from "./DetailPostComment";
+import DetailPostReply from "./DetailPostReply";
 
 export default {
   components: {
-    DetailPostBottomInput,
-    DetailPostCommentShow,
-    DetailPostInfo
+    DetailPostComment,
+    uniPopupMessage,
+    DetailPostReply,
+    uniPopupDialog,
+    uniPopup
   },
   data() {
     return {
+      Height: 0 + "px",
+      scrollH: 0 + "px",
       review: {
         headImgSrc:
           "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
@@ -84,17 +100,57 @@ export default {
         ]
       }
     };
+  },
+  created() {
+    this.systemHeight();
+  },
+  methods: {
+    //打开底部弹出框
+    openPopup() {
+      this.$refs.popup.open();
+    },
+    //关闭底部弹出框
+    closePopup() {
+      this.$refs.popup.close();
+    },
+    //获取系统视高
+    systemHeight() {
+      //系统视高
+      uni.getSystemInfo({
+        success: res => {
+          this.Height = res.windowHeight - 200 + "px";
+        }
+      });
+    },
+    //节点信息
+    selectorQuery() {
+      //系统视高
+      uni.getSystemInfo({
+        success: res => {
+          this.scrollH = res.windowHeight - res.statusBarHeight - 200 + "px";
+        }
+      });
+    }
+  },
+  mounted() {
+    this.selectorQuery();
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.input {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
+.bottomoPopup {
   background: #ffffff;
-  box-shadow: 1rpx 0 1rpx $uni-border-color;
+  border-top-right-radius: 12rpx;
+  border-top-left-radius: 12rpx;
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 64rpx;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-stroke-width: 0.2px;
+  -moz-osx-font-smoothing: grayscale;
+  display: block;
 }
 </style>
