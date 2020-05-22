@@ -208,7 +208,7 @@ export default {
   animation-delay: 0.88s;
 }
 
-@-webkit-keyframes load {
+@keyframes load {
   0% {
     opacity: 1;
   }
@@ -218,7 +218,7 @@ export default {
   }
 }
 
-@-webkit-keyframes loader-android {
+@keyframes loader-android {
   0% {
     transform: rotate(0deg);
   }
