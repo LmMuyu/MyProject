@@ -19,22 +19,24 @@
     <article>
       <swiper :current="TabCur" :style="`height:${height}`" @change="change" class="swiper-ml">
         <swiper-item v-for="(item, index) in tabList" :key="index" class="scrollY">
-          <!-- 有数据显示 -->
-          <template v-if="!item.data.length == 0">
-            <view>
-              <HomePostShow :list="item.data" :datanum="datanum" @openDetail="openDetail" />
-              <HomeUpLoading :text="text" />
-            </view>
-          </template>
-          <!-- 有数据显示 -->
+          <scroll-view scroll-y :style="`height:${height}`" @scrolltolower="scrolltolower(index)">
+            <!-- 有数据显示 -->
+            <template v-if="!item.data.length == 0">
+              <view>
+                <HomePostShow :list="item.data" :datanum="datanum" @openDetail="openDetail" />
+                <HomeUpLoading :text="text" />
+              </view>
+            </template>
+            <!-- 有数据显示 -->
 
-          <!-- 没数据显示 -->
-          <template v-else>
-            <view>
-              <HomeNullData />
-            </view>
-          </template>
-          <!-- 没数据显示 -->
+            <!-- 没数据显示 -->
+            <template v-else>
+              <view>
+                <HomeNullData />
+              </view>
+            </template>
+            <!-- 没数据显示 -->
+          </scroll-view>
         </swiper-item>
       </swiper>
     </article>
@@ -76,63 +78,20 @@ export default {
       height: 0,
       text: "上拉加载更多",
       tabList: [
-        { name: "精选", data: [] },
-        { name: "订阅", data: [] },
-        { name: "活动", data: [] },
-        { name: "信息", data: [] },
-        { name: "排行", data: [] },
-        { name: "世界", data: [] },
-        { name: "百科", data: [] }
+        { name: "精选", times: 1, plate: "choice", data: [] },
+        { name: "订阅", times: 1, plate: "subscribe", data: [] },
+        { name: "活动", times: 1, plate: "active", data: [] },
+        { name: "信息", times: 1, plate: "info", data: [] },
+        { name: "排行", times: 1, plate: "ranking", data: [] },
+        { name: "世界", times: 1, plate: "world", data: [] },
+        { name: "百科", times: 1, plate: "Encyclopedia", data: [] }
       ]
     };
   },
   created() {
     this.homePlateData();
   },
-  mounted() {
-    this.tabList[0].data = [
-      {
-        uid: "88031114",
-        id: "28878862",
-        name: "金艳",
-        date: Date.now(),
-        avatar: "http://dummyimage.com/70X70/f079f2/79f2cd&text=hebj",
-        content: "做机青以度利管性六使日花共利效。"
-      },
-      {
-        uid: "23734",
-        id: "16633417",
-        name: "杨秀兰",
-        date: Date.now(),
-        avatar: "http://dummyimage.com/70X70/f2a979/8679f2&text=frnv",
-        content: "一交来第受习同代很质第支究当明。"
-      },
-      {
-        uid: "93614816",
-        id: "54618178",
-        name: "邹敏",
-        date: Date.now(),
-        avatar: "http://dummyimage.com/70X70/8ff279/f279b2&text=mywh",
-        content: "或不按县它队资说总无风式第置式细。"
-      },
-      {
-        uid: "1688380",
-        id: "44888132",
-        name: "戴杰",
-        date: Date.now(),
-        avatar: "http://dummyimage.com/70X70/79d5f2/f2eb79&text=hqso",
-        content: "但下报众应风她展证完变复低处里算过。"
-      },
-      {
-        uid: "24700833",
-        id: "03954868",
-        name: "文磊",
-        date: Date.now(),
-        avatar: "http://dummyimage.com/70X70/c779f2/79f2a4&text=poev",
-        content: "各但当至委然后带太手山应图教书分水。"
-      }
-    ];
-  },
+  mounted() {},
   methods: {
     //计算滑动高度
     screenHeight() {
@@ -154,8 +113,17 @@ export default {
       });
     },
     //板块数据请求
-    homePlateData() {
-      homePlateData("registered")
+    homePlateData(index = 0) {
+      let { plate, times } = this.tabList[index];
+      //请求完成数据加一
+      this.tabList[index].times++;
+
+      let obj = {
+        plate,
+        times
+      };
+
+      homePlateData(obj)
         .then(vlaue => {
           console.log(value);
         })
