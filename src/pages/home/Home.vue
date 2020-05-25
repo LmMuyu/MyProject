@@ -60,7 +60,7 @@ import HomePostShow from "./childcomps/HomePostShow";
 /*
  * 方法
  * */
-// import { homePlateData } from "api/home";
+import { homePlateData } from "api/home";
 
 export default {
   name: "home",
@@ -75,7 +75,7 @@ export default {
       infodata: [],
       TabCur: 0,
       datanum: 20,
-      height: 0,
+      height: 0 + "px",
       text: "上拉加载更多",
       tabList: [
         { name: "精选", times: 1, plate: "choice", data: [] },
@@ -85,7 +85,8 @@ export default {
         { name: "排行", times: 1, plate: "ranking", data: [] },
         { name: "世界", times: 1, plate: "world", data: [] },
         { name: "百科", times: 1, plate: "Encyclopedia", data: [] }
-      ]
+      ],
+      list: []
     };
   },
   created() {
@@ -100,15 +101,7 @@ export default {
       //获取整个屏幕的视高
       uni.getSystemInfo({
         success: res => {
-          //获取类标签为scroll-con组件的高度
-          const query = uni.createSelectorQuery().in(this);
-          query
-            .select(".scroll-con")
-            .boundingClientRect(data => {
-              //屏幕的视高和组件的高度相减
-              that.height = res.windowHeight - data.height + "px";
-            })
-            .exec();
+          that.height = res.windowHeight + "px";
         }
       });
     },
@@ -118,20 +111,19 @@ export default {
       //请求完成数据加一
       this.tabList[index].times++;
 
-      uni.request({
-        url: "http://127.0.0.1:3000/home", //仅为示例，并非真实接口地址。
-        data: {
-          plate,
-          times
-        },
-        header: {
-          "custom-header": "hello" //自定义请求头信息
-        },
-        success: res => {
-          console.log(res.data);
-          this.text = "request success";
-        }
-      });
+      // uni.request({
+      //   url: "http://127.0.0.1:3000/home", //仅为示例，并非真实接口地址。
+      //   data: {
+      //     plate,
+      //     times
+      //   },
+      //   header: {
+      //     "custom-header": "hello" //自定义请求头信息
+      //   },
+      //   success: res => {
+      //     console.log(res.data);
+      //   }
+      // });
     },
     //点击跳到指定滑动屏
     tabChange(index) {
@@ -160,6 +152,22 @@ export default {
       });
     }
   },
+  onLoad() {
+    homePlateData({
+      plate: "choice",
+      times: 1
+    })
+      .then(value => {
+        console.log(value);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  onReady() {
+    //进入首页计算第一次滑动高度
+    this.screenHeight();
+  },
   //停止下拉刷新
   onPullDownRefresh() {
     setTimeout(() => {
@@ -174,10 +182,6 @@ export default {
       animationType: "slide-in-right",
       animationDuration: 300
     });
-  },
-  onReady() {
-    //进入首页计算第一次滑动高度
-    this.screenHeight();
   },
   onNavigationBarButtonTap(option) {
     if (option.index === 0) {

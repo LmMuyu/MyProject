@@ -1,13 +1,5 @@
-import { request } from './request';
+import http from "./request";
 
-export async function homePlateData(data) {
-  let { plate, times } = data;
-
-  return request({
-    url: "/home",
-    params: {
-      plate,
-      times,
-    },
-  });
+export function homePlateData(data) {
+  return http.get("/home", { params: data });
 }

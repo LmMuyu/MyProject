@@ -39,7 +39,7 @@
       <text>地址</text>
       <view class="ma-left-au flex-a-c vimagee">
         <pick-regions :defaultRegion="defaultRegionCode" @getRegion="getRegion">
-          <text>{{regionName}}</text>
+          <text>{{region}}</text>
           <i class="iconfont icon">&#xe690;</i>
         </pick-regions>
       </view>
@@ -79,25 +79,26 @@ export default {
     KXDateTime,
     neilModal
   },
+  props: {
+    address: {
+      type: String,
+      default: () => "广东省 广州市 番禺区"
+    }
+  },
   data() {
     return {
       image:
         "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4051190685,3300949277&fm=11&gp=0.jpg",
       show: false,
       name: "",
-      names: "哈哈哈哈",
-      date: "",
-      region: [],
-      defaultRegion: ["广东省", "广州市", "番禺区"],
-      defaultRegionCode: "440113"
+      names: "哈哈哈哈", //名称
+      date: "2002-01-06", //生日
+      region: this.address, //地址
+      defaultRegion: ["广东省", "广州市", "番禺区"], //打开地址选择栏时默认选择的地址
+      defaultRegionCode: "440113" //邮箱地址
     };
   },
-  computed: {
-    regionName() {
-      // 转为字符串
-      return this.region.map(item => item.name).join(" ");
-    }
-  },
+  computed: {},
   methods: {
     //修改头像
     modifyT() {
@@ -126,10 +127,8 @@ export default {
     cancel() {
       this.name = "";
     },
-    //修改生日的参数
+    //修改生日
     kxdatetime(e) {
-      console.log(e);
-
       this.date = e;
     },
     //修改生日
@@ -138,7 +137,8 @@ export default {
     },
     // 获取选择的地区
     getRegion(region) {
-      this.region = region;
+      //将地址转为字符串
+      this.region = region.map(item => item.name).join(" ");
     }
   }
 };
