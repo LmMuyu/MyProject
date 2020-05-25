@@ -3,7 +3,7 @@
     <view class="flex-a-c p-tb-16">
       <text>头像</text>
       <view class="ma-left-au flex-a-c vimagee">
-        <image :src="image" style="width:100rpx;height:100rpx" class="image" mode="aspectFill"  />
+        <image :src="image" style="width:100rpx;height:100rpx" class="image" mode="aspectFill" />
         <i class="iconfont icon" @click="modifyT">&#xe690;</i>
       </view>
     </view>
@@ -24,8 +24,8 @@
     <view class="flex-a-c p-tb-16">
       <text>生日</text>
       <view class="ma-left-au flex-a-c vimagee">
-        <text>2002-1-6</text>
-        <i class="iconfont icon">&#xe690;</i>
+        <text>{{date}}</text>
+        <i class="iconfont icon" @click="putDirthday">&#xe690;</i>
       </view>
     </view>
     <view class="flex-a-c p-tb-16">
@@ -38,27 +38,45 @@
     <view class="flex-a-c p-tb-16">
       <text>地址</text>
       <view class="ma-left-au flex-a-c vimagee">
-        <text>河源市</text>
-        <i class="iconfont icon">&#xe690;</i>
+        <pick-regions :defaultRegion="defaultRegionCode" @getRegion="getRegion">
+          <text>{{regionName}}</text>
+          <i class="iconfont icon">&#xe690;</i>
+        </pick-regions>
       </view>
     </view>
     <veiw class="flex-1 flex-ja-c margin-top wanc">
       <text>完成</text>
     </veiw>
 
-    <neil-modal :show="show" @cancel="cancel" :name="name" @close="close" @confirm="confirm" title="修改名称">
+    <!--名称修改-->
+    <neil-modal
+      :show="show"
+      @cancel="cancel"
+      :name="name"
+      @close="close"
+      @confirm="confirm"
+      title="修改名称"
+    >
       <view style="border:1rpx;solid;#red">
         <input type="text" v-model="name" class="input" placeholder="1~6个字符" maxlength="6" />
       </view>
     </neil-modal>
+
+    <!--修改生日-->
+    <KXDateTime @rundata="kxdatetime" default="start" ref="kxdateTime" />
+    <!--修改地址-->
   </view>
 </template>
 
 <script>
+import KXDateTime from "components/content/deta/kx-datetime/kx-datetime";
+import pickRegions from "components/content/pick-regions/pick-regions";
 import neilModal from "components/content/neil-modal/neil-modal";
 
 export default {
   components: {
+    pickRegions,
+    KXDateTime,
     neilModal
   },
   data() {
@@ -67,8 +85,18 @@ export default {
         "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4051190685,3300949277&fm=11&gp=0.jpg",
       show: false,
       name: "",
-      names: "哈哈哈哈"
+      names: "哈哈哈哈",
+      date: "",
+      region: [],
+      defaultRegion: ["广东省", "广州市", "番禺区"],
+      defaultRegionCode: "440113"
     };
+  },
+  computed: {
+    regionName() {
+      // 转为字符串
+      return this.region.map(item => item.name).join(" ");
+    }
   },
   methods: {
     //修改头像
@@ -97,6 +125,20 @@ export default {
     //点击取消时触发
     cancel() {
       this.name = "";
+    },
+    //修改生日的参数
+    kxdatetime(e) {
+      console.log(e);
+
+      this.date = e;
+    },
+    //修改生日
+    putDirthday() {
+      this.$refs.kxdateTime.open();
+    },
+    // 获取选择的地区
+    getRegion(region) {
+      this.region = region;
     }
   }
 };
@@ -130,6 +172,9 @@ text {
   background: #3498db;
   margin: 0 32rpx;
   border-radius: $uni-border-radius-lg;
+}
+.wanc > text {
+  color: #34495e !important;
 }
 .name {
   border: 1rpx solid #3498db;

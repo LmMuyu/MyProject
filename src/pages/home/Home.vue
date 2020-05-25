@@ -60,7 +60,7 @@ import HomePostShow from "./childcomps/HomePostShow";
 /*
  * 方法
  * */
-import { homePlateData } from "api/home";
+// import { homePlateData } from "api/home";
 
 export default {
   name: "home",
@@ -118,18 +118,20 @@ export default {
       //请求完成数据加一
       this.tabList[index].times++;
 
-      let obj = {
-        plate,
-        times
-      };
-
-      homePlateData(obj)
-        .then(vlaue => {
-          console.log(value);
-        })
-        .catch(err => {
-          err;
-        });
+      uni.request({
+        url: "http://127.0.0.1:3000/home", //仅为示例，并非真实接口地址。
+        data: {
+          plate,
+          times
+        },
+        header: {
+          "custom-header": "hello" //自定义请求头信息
+        },
+        success: res => {
+          console.log(res.data);
+          this.text = "request success";
+        }
+      });
     },
     //点击跳到指定滑动屏
     tabChange(index) {

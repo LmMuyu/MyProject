@@ -1,5 +1,5 @@
 <template>
-  <view class="ispostmodule" >
+  <view class="ispostmodule">
     <view class="postmodule">
       <view @click="openSpace">
         <image :src="Info.avatar" class="img-to" />
@@ -18,9 +18,12 @@
     </view>
     <view class="content" @click="openPostDetail">
       <span class="text">{{ Info.content }}</span>
-      <img
-        src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=2534506313,1688529724&fm=26&gp=0.jpg"
-        alt
+      <image
+        v-for="(item, index) in Info.contentimage"
+        :key="index"
+        :src="item"
+        lazy-load
+        mode="aspectFill"
       />
     </view>
     <view class="gong-neng">
@@ -68,13 +71,17 @@ export default {
     },
     //打开帖子详情页
     openPostDetail() {
-			this.$emit("openPostDetail")
+      this.$emit("openPostDetail");
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+image {
+  width: 200rpx;
+  height: 300rpx;
+}
 .ispostmodule {
   border-bottom: 1rpx solid $uni-border-color;
 }
@@ -118,8 +125,7 @@ export default {
 .content {
   margin-top: 15rpx;
 }
-.content img {
-  width: 100%;
+.content > image {
   border-radius: 6rpx;
   height: 300rpx;
 }

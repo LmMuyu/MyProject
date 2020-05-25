@@ -1,10 +1,13 @@
-import { request } from "./request";
+import { request } from './request';
 
-export function homePlateData(plate) {
+export async function homePlateData(data) {
+  let { plate, times } = data;
+
   return request({
     url: "/home",
     params: {
       plate,
+      times,
     },
   });
 }
