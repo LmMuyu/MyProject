@@ -15,8 +15,14 @@ export default {
 @import "./common/css.css";
 @import "./static/css/animate.css";
 @import "./static/css/normalize.css";
+
+/**colorUi */
+@import "./components/common/colorui/main.css";
+@import "./components/common/colorui/icon.css";
+
 /* 头条小程序需要把 iconfont 样式放到组件外 */
 @import "components/content/m-input/m-icon/m-icon.css";
+
 /*图标*/
 @font-face {
   font-family: "iconfont"; /* project id 1810160 */

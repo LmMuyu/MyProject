@@ -45,7 +45,7 @@
       </view>
     </view>
     <veiw class="flex-1 flex-ja-c margin-top wanc">
-      <text>完成</text>
+      <text @click="okPut">完成</text>
     </veiw>
 
     <!--名称修改-->
@@ -80,6 +80,11 @@ export default {
     neilModal
   },
   props: {
+    avatar: {
+      type: String,
+      default: () =>
+        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4051190685,3300949277&fm=11&gp=0.jpg"
+    },
     address: {
       type: String,
       default: () => "广东省 广州市 番禺区"
@@ -87,10 +92,9 @@ export default {
   },
   data() {
     return {
-      image:
-        "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4051190685,3300949277&fm=11&gp=0.jpg",
+      image: this.avatar, //头像
       show: false,
-      name: "",
+      name: "", //修改名称时临时保存的名称
       names: "哈哈哈哈", //名称
       date: "2002-01-06", //生日
       region: this.address, //地址
@@ -139,6 +143,14 @@ export default {
     getRegion(region) {
       //将地址转为字符串
       this.region = region.map(item => item.name).join(" ");
+    },
+    //完成发送数据给后台
+    okPut() {
+      let userInfo = {};
+      userInfo.uid = "";
+      userInfo.birthday = this.date;
+      userInfo.name = this.names;
+      userInfo.address = this.region;
     }
   }
 };

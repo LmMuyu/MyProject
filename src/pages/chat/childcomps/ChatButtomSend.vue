@@ -1,9 +1,14 @@
 <template>
   <view class="flex-a-c full-width" :style="`margin-bottom:${Keyboard}`">
-    <input class="flex-1 input font-size" v-model="text" @click="onKeyHeight" confirm-hold />
+    <input
+      class="flex-1 input font-size"
+      v-model="text"
+      :adjust-position="false"
+      @click="onKeyHeight"
+      confirm-hold
+    />
     <view class="class-name">
-      <i class="iconfont">&#xe604;</i>
-      <text class="text" @click="Send">发送</text>
+      <i class="iconfont" @click="Send">&#xe604;</i>
     </view>
   </view>
 </template>
@@ -49,16 +54,16 @@ export default {
 }
 .full-width {
   width: 100%;
-  padding: 16rpx 0;
-  background: #f1f2f6;
+  background: #fdfdfd;
   box-shadow: 1rpx 0 1rpx $uni-border-color;
 }
 .input {
   border: 1rpx solid $uni-border-color;
-  padding: 16rpx;
+  padding: 12rpx;
+  border-radius: 10rpx;
 }
 .class-name {
-  padding: 0 20rpx;
+  width: 100rpx;
   display: flex;
   flex-direction: column;
   align-items: center;

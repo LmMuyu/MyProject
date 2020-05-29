@@ -8,7 +8,6 @@ import "moment/locale/zh-cn";
 Vue.config.productionTip = false;
 Vue.prototype.$bus = new Vue();
 Vue.prototype.moment = moment;
-Vue.prototype.$store = store;
 moment.locale("zh-cn");
 
 App.mpType = "app";

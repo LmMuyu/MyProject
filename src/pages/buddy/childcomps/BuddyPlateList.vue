@@ -1,6 +1,6 @@
 <template>
   <view>
-    <BuddyPlate v-for="(item, index) in 10" :key="index" />
+    <BuddyPlate v-for="(item, index) in 1" :key="index" />
   </view>
 </template>
 

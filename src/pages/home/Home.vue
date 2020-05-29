@@ -60,7 +60,7 @@ import HomePostShow from "./childcomps/HomePostShow";
 /*
  * 方法
  * */
-import { homePlateData } from "api/home";
+import { homePlateData } from "@/utils/home";
 
 export default {
   name: "home",
@@ -90,7 +90,7 @@ export default {
     };
   },
   created() {
-    this.homePlateData();
+    this.homePlate();
   },
   mounted() {},
   methods: {
@@ -106,24 +106,20 @@ export default {
       });
     },
     //板块数据请求
-    homePlateData(index = 0) {
-      let { plate, times } = this.tabList[index];
+    homePlate(index = 0) {
+      let ateData = this.tabList[index]
+      let {times,plate} = ateData;
+      
       //请求完成数据加一
       this.tabList[index].times++;
 
-      // uni.request({
-      //   url: "http://127.0.0.1:3000/home", //仅为示例，并非真实接口地址。
-      //   data: {
-      //     plate,
-      //     times
-      //   },
-      //   header: {
-      //     "custom-header": "hello" //自定义请求头信息
-      //   },
-      //   success: res => {
-      //     console.log(res.data);
-      //   }
-      // });
+      homePlateData(plate, times)
+        .then(value => {
+          console.log(value);
+        })
+        .catch(err => {
+          console.log(err);
+        });
     },
     //点击跳到指定滑动屏
     tabChange(index) {
@@ -151,18 +147,6 @@ export default {
         animationDuration: 200
       });
     }
-  },
-  onLoad() {
-    homePlateData({
-      plate: "choice",
-      times: 1
-    })
-      .then(value => {
-        console.log(value);
-      })
-      .catch(err => {
-        console.log(err);
-      });
   },
   onReady() {
     //进入首页计算第一次滑动高度
