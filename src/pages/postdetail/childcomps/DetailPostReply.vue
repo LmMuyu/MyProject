@@ -1,24 +1,23 @@
 <template>
   <view class="flex">
     <view class="cenHeadImgContent">
-      <image class="headImg" :src="reviewMsg.headImgSrc" />
+      <image class="headImg" :src="reviewMsg.avatar" />
     </view>
     <view class="cenHostMsgContent">
       <view class="viewMb viewMb-space-between">
         <view>
-          <text class="textSize">{{reviewMsg.userName}}</text>
-          <text class="textCenMsg cenHostMsg2">LV{{reviewMsg.userLevel}}</text>
+          <text class="textSize">{{reviewMsg.name}}</text>
+          <text v-if="false" class="textCenMsg cenHostMsg2">LV{{reviewMsg.userLevel}}</text>
         </view>
         <view>
           <text class="followText">+ 关注</text>
         </view>
       </view>
       <view class="viewMb">
-        <text class="cenHostMsg3 textCenMsg">#{{reviewMsg.cenId}}</text>
         <text class="cenHostMsg4 textCenMsg">{{reviewMsg.sendTime}}</text>
       </view>
       <view class="cenHostReview viewMb">
-        <text class="textSendMsg">{{reviewMsg.sendMsg}}</text>
+        <text class="textSendMsg">{{reviewMsg.content}}</text>
       </view>
       <view class="iconRow">
         <view>

@@ -16,8 +16,12 @@
         >{{ attention ? '已关注' : '关注' }}</span>
       </view>
     </view>
+    <!--内容文字-->
+    <view class="font" @click="openPostDetail">
+      <text class="text">{{ Info.content }}</text>
+    </view>
+    <!--内容图片-->
     <view class="content" @click="openPostDetail">
-      <span class="text">{{ Info.content }}</span>
       <image
         v-for="(item, index) in Info.contentimage"
         :key="index"
@@ -71,7 +75,7 @@ export default {
     },
     //打开帖子详情页
     openPostDetail() {
-      this.$emit("openPostDetail");
+      this.$emit("openPostDetail",this.Info.postId);
     }
   }
 };
@@ -81,6 +85,7 @@ export default {
 image {
   width: 200rpx;
   height: 300rpx;
+  margin: 0 8rpx;
 }
 .ispostmodule {
   border-bottom: 1rpx solid $uni-border-color;
@@ -124,10 +129,13 @@ image {
 }
 .content {
   margin-top: 15rpx;
+  display: flex;
+  flex-wrap: wrap;
 }
 .content > image {
   border-radius: 6rpx;
   height: 300rpx;
+  padding-bottom: 6rpx;
 }
 .gong-neng {
   height: 75rpx;
@@ -137,6 +145,9 @@ image {
 }
 .gong-neng > view {
   margin-right: 50rpx;
+}
+.font {
+  padding: 8rpx 0;
 }
 .text {
   font-size: $uni-font-size-base;

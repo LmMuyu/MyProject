@@ -62,7 +62,8 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  margin-top: 32rpx;
+  padding: 32rpx 0 0 0;
+  background: #ffffff;
 }
 .billing {
   display: flex;

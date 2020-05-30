@@ -1,5 +1,5 @@
 <template>
-	<view class="CommunityHeadText flex-ja-c margin-top text">
+	<view class="CommunityHeadText flex-ja-c text">
 		<view :class="{ active: index == textindex }" v-for="(item, index) in classification" :key="index" @click="onIndex(index)">{{ item.name }}</view>
 	</view>
 </template>
@@ -41,11 +41,9 @@ export default {
 .text > view {
 	margin: 0 $uni-spacing-row-sm;
 }
-.margin-top {
-	margin-top: 48rpx;
-}
 .CommunityHeadText {
 	box-shadow: 0 -1rpx 1rpx $uni-bg-color-mask;
-	padding: 8rpx;
+	padding: 48rpx 0 8rpx 0;
+	background: #ffffff;
 }
 </style>

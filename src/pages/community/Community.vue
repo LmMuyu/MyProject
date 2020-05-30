@@ -14,7 +14,7 @@
           <CommunityPostShow :data="this.classification[0].data" />
         </view>
       </swiper-item>
-      <!--社区-->
+      <!--话题-->
       <swiper-item>
         <!--热门分类-->
         <CommunityTopCategories class="topcategories" :category="category" />
@@ -128,8 +128,6 @@ export default {
 
 <style lang="scss" scoped>
 .HeadText {
-  position: relative;
-  z-index: 99;
   background: #ffffff;
 }
 .swiperIs {

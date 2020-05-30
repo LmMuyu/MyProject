@@ -8,7 +8,7 @@
         <i class="iconfont" @click="closePopup">&#xe607;</i>
         <scroll-view scroll-y :style="`height:${scrollH}`">
           <DetailPostReply
-            v-for="(item, index) in review.reviewLess"
+            v-for="(item, index) in review.reply"
             :key="index"
             :reviewMsg="item"
           />
@@ -34,71 +34,17 @@ export default {
     uniPopupDialog,
     uniPopup
   },
+  props: {
+    postData: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       Height: 0 + "px",
       scrollH: 0 + "px",
-      review: {
-        headImgSrc:
-          "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-        userName: "张三",
-        userLevel: 4,
-        cenId: 155155555,
-        sendTime: "2002-4-1",
-        sendMsg: "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地",
-        reviewLess: [
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          }
-        ]
-      }
+      review: this.postData
     };
   },
   created() {

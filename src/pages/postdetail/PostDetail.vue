@@ -1,89 +1,65 @@
 <template>
   <view>
     <!--头部作者信息-->
-    <DetailPostInfo class="headinfo" />
+    <DetailPostInfo class="headinfo" :dataInfo="review.postData"  />
+    <!--分割线-->
+    <Dividing />
     <!--最新评论-->
-    <DetailPostCommentShow />
+    <DetailPostCommentList :comment="review.comment" />
     <!--发评论-->
     <DetailPostBottomInput class="input" />
   </view>
 </template>
 
 <script>
-import DetailPostCommentShow from "./childcomps/DetailPostCommentShow";
-import DetailPostInfo from "./childcomps/DetailPostInfo";
+import Dividing from "components/content/dividing/Dividing";
+
+import DetailPostCommentList from "./childcomps/DetailPostCommentList";
 import DetailPostBottomInput from "./childcomps/DetailPostBottomInput";
+import DetailPostInfo from "./childcomps/DetailPostInfo";
+
+import { postReqData } from "@/utils/postdateil";
 
 export default {
   components: {
     DetailPostBottomInput,
-    DetailPostCommentShow,
-    DetailPostInfo
+    DetailPostCommentList,
+    DetailPostInfo,
+    Dividing
   },
   data() {
     return {
-      review: {
-        headImgSrc:
-          "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-        userName: "张三",
-        userLevel: 4,
-        cenId: 155155555,
-        sendTime: "2002-4-1",
-        sendMsg: "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地",
-        reviewLess: [
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          },
-          {
-            headImgSrc:
-              "http://img0.imgtn.bdimg.com/it/u=2643897908,2418585488&fm=26&gp=0.jpg",
-            userName: "张三",
-            userLevel: 4,
-            cenId: 155155555,
-            sendTime: "2002-4-1",
-            sendMsg:
-              "基督教阿达哇嗲为大家我打完就嗲家嗲哇ii大家无敌爱我多久啊基地"
-          }
-        ]
-      }
+      pid: "",
+      review: {} //数据
     };
+  },
+  created() {},
+  methods: {
+    postReqData() {
+      let option = {
+        option: "/post/data",
+        data: {
+          pid: this.pid
+        }
+      };
+
+      postReqData(option)
+        .then(({ post }) => {
+          console.log(post);
+
+          this.review = post;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  },
+  onLoad(option) {
+    //获取帖子id
+    this.pid = option.pid;
+
+    //帖子数据
+    this.postReqData();
   }
 };
 </script>
@@ -96,5 +72,8 @@ export default {
   right: 0;
   background: #ffffff;
   box-shadow: 1rpx 0 1rpx $uni-border-color;
+}
+.headinfo{
+  background: #ffffff;
 }
 </style>

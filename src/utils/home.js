@@ -1,14 +1,9 @@
 import { request } from "./request";
 
-//首页板块数据
-export function homePlateData(plate,times=1) {
-  console.log(plate,times);
-  
-  return request({
-    url: "/home",
-    params: {
-      plate,
-      times,
-    },
-  });
+//option:请求地址，必填 data:参数 method 请求方式
+
+export async function homePlateData(config) {
+  let data = await request(config);
+
+  return data;
 }

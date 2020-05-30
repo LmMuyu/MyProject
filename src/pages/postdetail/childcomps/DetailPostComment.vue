@@ -2,12 +2,12 @@
   <view class="content">
     <view class="cenHost">
       <view class="cenHeadImgContent">
-        <image class="headImg" :src="reviewMsg.headImgSrc" />
+        <image class="headImg" :src="reviewMsg.avatar" />
       </view>
       <view class="cenHostMsgContent">
         <view class="viewMb viewMb-space-between">
           <view>
-            <text class="textSize">{{reviewMsg.userName}}</text>
+            <text class="textSize">{{reviewMsg.name}}</text>
             <text class="textCenMsg cenHostMsg2">LV{{reviewMsg.userLevel}}</text>
           </view>
           <view>
@@ -15,16 +15,16 @@
           </view>
         </view>
         <view class="viewMb">
-          <text class="cenHostMsg3 textCenMsg">#{{reviewMsg.cenId}}</text>
+          <text class="cenHostMsg3 textCenMsg">#{{reviewMsg.uid}}</text>
           <text class="cenHostMsg4 textCenMsg">{{reviewMsg.sendTime}}</text>
         </view>
         <view class="cenHostReview viewMb">
-          <text class="textSendMsg">{{reviewMsg.sendMsg}}</text>
+          <text class="textSendMsg">{{reviewMsg.content}}</text>
         </view>
         <view class="iconRow">
           <view>
             <dnIcon type="haoping" color="#C0C0C0"></dnIcon>
-            <text style="padding-left: 5px;">{{reviewMsg.likeNum}}</text>
+            <text style="padding-left: 5px;">{{reviewMsg.like}}</text>
           </view>
           <view>
             <dnIcon type="zan" color="#C0C0C0"></dnIcon>
@@ -37,16 +37,16 @@
         <view
           class="threeReviewContent"
           @click="openChildReview(reviewMsg)"
-          v-if="reviewMsg.reviewLess.length"
+          v-if="reviewMsg.reply.length"
         >
           <view class="threeReviewVueText" v-for="(reKey, key) in reviewLess " :key="key">
-            {{reKey.userName}}
+            {{reKey.name}}
             <text class="defaultBlack">回复</text>
             {{reKey.targetUserName}}
-            <text class="defaultBlack">:{{reKey.sendMsg}}</text>
+            <text class="defaultBlack">:{{reKey.content}}</text>
           </view>
-          <view @click="openPopup" class="reviewNumContent" v-if="reviewMsg.reviewLess.length > 2">
-            <text>共{{reviewMsg.reviewLess.length}}条回复</text>
+          <view @click="openPopup" class="reviewNumContent" v-if="reviewMsg.reply.length > 2">
+            <text>共{{reviewMsg.reply.length}}条回复</text>
             <dnIcon type="tiaozhuan" size="12" style="margin-left: 5px;"></dnIcon>
           </view>
         </view>
@@ -83,15 +83,15 @@ export default {
   },
   computed: {
     reviewLess() {
-      if (this.reviewMsg.reviewLess.length > 2) {
+      if (this.reviewMsg.reply.length > 2) {
         return this.postData;
       }
-      return this.reviewMsg.reviewLess;
+      return this.reviewMsg.reply;
     }
   },
   onLoad() {},
   mounted() {
-    this.postData = this.reviewMsg.reviewLess.slice(0, 3);
+    this.postData = this.reviewMsg.reply.slice(0, 3);
   },
   methods: {
     openChildReview(item) {

@@ -6,7 +6,7 @@
       class="flex-1 font-size"
       v-model="comtent"
       :adjust-position="false"
-      placeholder="不要害羞啊~~~~~"
+      placeholder="文明发言"
     />
     <i class="iconfont class_name flex-ja-c">&#xe604;</i>
   </view>
@@ -54,13 +54,12 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 80rpx;
 }
 input {
   border-radius: 8rpx;
-  background: rgb(245, 245, 245);
+  background: rgb(240, 240, 240);
   color: $uni-text-color-disable;
-  padding: 6rpx;
+  height: 48rpx;
 }
 .class_name {
   width: 100rpx;

@@ -23,7 +23,7 @@
             <!-- 有数据显示 -->
             <template v-if="!item.data.length == 0">
               <view>
-                <HomePostShow :list="item.data" :datanum="datanum" @openDetail="openDetail" />
+                <HomePostShow :list="item.data" @openDetail="openDetail" />
                 <HomeUpLoading :text="text" />
               </view>
             </template>
@@ -73,6 +73,7 @@ export default {
   data() {
     return {
       infodata: [],
+      list: [],
       TabCur: 0,
       datanum: 20,
       height: 0 + "px",
@@ -85,8 +86,7 @@ export default {
         { name: "排行", times: 1, plate: "ranking", data: [] },
         { name: "世界", times: 1, plate: "world", data: [] },
         { name: "百科", times: 1, plate: "Encyclopedia", data: [] }
-      ],
-      list: []
+      ]
     };
   },
   created() {
@@ -96,26 +96,36 @@ export default {
   methods: {
     //计算滑动高度
     screenHeight() {
-      let that = this;
-
       //获取整个屏幕的视高
       uni.getSystemInfo({
         success: res => {
-          that.height = res.windowHeight + "px";
+          this.height = res.windowHeight + "px";
         }
       });
     },
     //板块数据请求
     homePlate(index = 0) {
-      let ateData = this.tabList[index]
-      let {times,plate} = ateData;
-      
+      this.plateReq(index);
+    },
+    //板块数据请求逻辑抽离
+    plateReq(index) {
+      let { times, plate } = this.tabList[index];
+
+      let request = {
+        option: "/home",
+        data: {
+          plate,
+          times
+        }
+      };
+
       //请求完成数据加一
       this.tabList[index].times++;
 
-      homePlateData(plate, times)
-        .then(value => {
-          console.log(value);
+      homePlateData(request)
+        .then(({ dataList, success }) => {
+          //每一个板块帖子数据
+          this.tabList[index].data.push(...dataList);
         })
         .catch(err => {
           console.log(err);
@@ -130,22 +140,22 @@ export default {
       this.tabChange(detail.current);
     },
     //上拉加载
-    scrolltolower(i) {
+    async scrolltolower(i) {
       if (this.text !== "上拉加载更多") return;
       this.text = "正在加载中...";
+      await this.plateReq(i);
 
-      setTimeout(() => {
-        this.text = "上拉加载更多";
-        this.datanum += 10;
-      }, 4000);
+      this.text = "上拉加载更多";
     },
     //打开帖子详情页
-    openDetail() {
-      uni.navigateTo({
-        url: "../postdetail/PostDetail",
-        animationType: "pop-in",
-        animationDuration: 200
-      });
+    openDetail(postid) {
+      if (postid) {
+        uni.navigateTo({
+          url: `../postdetail/PostDetail?pid=${postid}`,
+          animationType: "pop-in",
+          animationDuration: 200
+        });
+      }
     }
   },
   onReady() {
@@ -156,7 +166,7 @@ export default {
   onPullDownRefresh() {
     setTimeout(() => {
       uni.stopPullDownRefresh();
-    }, 5000);
+    }, 3000);
   },
   //点击搜索框跳转
   onNavigationBarSearchInputClicked() {
@@ -181,6 +191,9 @@ export default {
 </script>
 
 <style scoped>
+#home {
+  height: 100vh;
+}
 .text-class {
   background: #f1f2f6;
 }
@@ -191,6 +204,7 @@ export default {
 .scroll-con {
   display: inline-block;
   padding: 6px;
+  background: #ffffff;
 }
 .swiper-ml {
   margin: 0 8rpx;

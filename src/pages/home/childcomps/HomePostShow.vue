@@ -1,8 +1,8 @@
 <template>
   <view>
     <PostModule
-      v-for="(item, index) in list"
-      :key="index"
+      v-for="item in list"
+      :key="item.uid"
       :dataInfo="item"
       @openPostDetail="openPostDetail"
     />
@@ -28,8 +28,8 @@ export default {
     }
   },
   methods: {
-    openPostDetail() {
-      this.$emit("openDetail")
+    openPostDetail(Pid) {
+      this.$emit("openDetail",Pid);
     }
   }
 };

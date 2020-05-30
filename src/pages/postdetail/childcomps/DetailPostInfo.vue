@@ -2,14 +2,10 @@
   <view class="ispostmodule">
     <view class="postmodule">
       <view @click="openSpace">
-        <image
-          mode="aspectFill"
-          src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1713396441,1487163637&fm=26&gp=0.jpg"
-          class="img-to"
-        />
+        <image mode="aspectFill" :src="dataInfo.avatar" class="img-to" />
       </view>
       <view class="xinxi" @click="openSpace">
-        <view>酷酷酷</view>
+        <view>{{dataInfo.name}}</view>
         <view>200202</view>
       </view>
       <view class="guanzhu">
@@ -20,11 +16,15 @@
         >{{ attention ? '已关注' : '关注' }}</span>
       </view>
     </view>
+    <view class="texts">
+      <span class="text">{{dataInfo.content}}</span>
+    </view>
     <view class="content" @click="openPostDetail">
-      <span class="text">大家进啊我就打就为大家阿加大家啊我觉得就到家啊我就打我打我大家我的家啊大家教大家我i蒂埃达降维打击的</span>
       <image
+        v-for="(item, index) in dataInfo.contentimage"
+        :key="index"
         mode="aspectFill"
-        src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2440329085,2803828117&fm=15&gp=0.jpg"
+        :src="item"
         alt
       />
     </view>
@@ -82,6 +82,7 @@ export default {
 <style lang="scss" scoped>
 .ispostmodule {
   border-bottom: 1rpx solid $uni-border-color;
+  padding: 8rpx;
 }
 .img-to {
   width: 70rpx;
@@ -114,7 +115,7 @@ export default {
   align-items: center;
 }
 .guanzhu > span {
-  margin-right: 24rpx;
+  margin-right: 16rpx;
   color: #ffffff;
   padding: 6rpx 8rpx;
   border-radius: 6rpx;
@@ -122,9 +123,10 @@ export default {
 }
 .content {
   margin-top: 15rpx;
+  display: flex;
+  flex-wrap: wrap;
 }
-.content img {
-  width: 100%;
+.content image {
   border-radius: 6rpx;
   height: 300rpx;
 }
@@ -148,5 +150,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -webkit-text-stroke-width: 0.4rpx;
   -moz-osx-font-smoothing: grayscale;
+}
+.texts {
+  padding: 8rpx 0;
 }
 </style>
