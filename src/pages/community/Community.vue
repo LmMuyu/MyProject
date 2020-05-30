@@ -8,14 +8,8 @@
       ref="CommunityHeadText"
     />
     <swiper :style="`height:${height}`" class="swiperIs" :current="index" @change="change">
-      <!--关注-->
-      <swiper-item>
-        <view>
-          <CommunityPostShow :data="this.classification[0].data" />
-        </view>
-      </swiper-item>
       <!--话题-->
-      <swiper-item>
+      <swiper-item class="swiperitem">
         <!--热门分类-->
         <CommunityTopCategories class="topcategories" :category="category" />
         <!-- 搜索栏 -->
@@ -31,7 +25,14 @@
         <veiw>
           <span class="zuijing">最近更新</span>
         </veiw>
-        <CommunityTopicShow @toDateil="toDateil" />
+        <CommunityTopicShow @toDateil="toDateil" :updated="updated" />
+      </swiper-item>
+
+      <!--关注-->
+      <swiper-item class="swiperitem">
+        <view>
+          <CommunityPostShow :data="this.classification[0].data" />
+        </view>
       </swiper-item>
     </swiper>
   </view>
@@ -45,6 +46,8 @@ import CommunityHeadText from "./childcomps/CommunityHeadText.vue";
 import CommunitySearchBar from "./childcomps/CommunitySearchBar";
 import CommunityTopicShow from "./childcomps/CommunityTopicShow";
 import CommunityPostShow from "./childcomps/CommunityPostShow";
+
+import { communityplate } from "@/utils/community";
 
 export default {
   name: "Community",
@@ -60,20 +63,19 @@ export default {
     return {
       classification: [
         {
-          name: "关注",
+          name: "话题",
+          plate: "topic",
           data: []
         },
         {
-          name: "话题"
+          name: "关注",
+          data: []
         }
       ],
       height: 0,
       index: 0,
-      swiper: [
-        "https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1065785711,3125771441&fm=26&gp=0.jpg",
-        "http://img2.imgtn.bdimg.com/it/u=1344996754,553300684&fm=26&gp=0.jpg",
-        "http://img1.imgtn.bdimg.com/it/u=1294564799,617882576&fm=26&gp=0.jpg"
-      ],
+      swiper: [],
+      updated: [],
       category: [
         { name: "关注" },
         { name: "推荐" },
@@ -83,6 +85,9 @@ export default {
         { name: "娱乐" }
       ]
     };
+  },
+  created() {
+    this.communityplate();
   },
   mounted() {
     //获取视高
@@ -99,8 +104,7 @@ export default {
           query
             .select(".HeadText")
             .boundingClientRect(data => {
-              this.height =
-                res.windowHeight - res.statusBarHeight - data.height + "px";
+              this.height = res.windowHeight - data.height + "px";
             })
             .exec();
         }
@@ -121,6 +125,35 @@ export default {
         animationType: "slide-in-bottom",
         animationDuration: 200
       });
+    },
+    communityplate(index = 0) {
+      let { plate } = this.classification[index];
+      let option = {
+        option: "/community",
+        data: {
+          plate
+        }
+      };
+
+      let swiper = {
+        option: "/community",
+        data: {
+          plate: "swiper"
+        }
+      };
+
+      communityplate(option, swiper)
+        .then(([plate, swiper]) => {
+          //轮播图数据
+          this.swiper = swiper;
+
+          //话题
+          let { list } = plate;
+          this.updated = list;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
 };
@@ -143,5 +176,8 @@ export default {
   position: relative;
   top: 16rpx;
   font-size: 32rpx;
+}
+.swiperitem {
+  overflow-y: scroll;
 }
 </style>

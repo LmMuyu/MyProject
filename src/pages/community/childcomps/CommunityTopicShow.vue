@@ -1,6 +1,6 @@
 <template>
   <view>
-    <CommunityTopic @click.native="toDateil" v-for="(item, index) in 10" :key="index" />
+    <CommunityTopic @click.native="toDateil" v-for="(item, index) in updated" :key="index" :updatedShow="item" />
   </view>
 </template>
 
@@ -11,9 +11,15 @@ export default {
   components: {
     CommunityTopic
   },
-  methods:{
-    toDateil(){
-      this.$emit("toDateil")
+  props: {
+    updated: {
+      type: Array,
+      default: () => []
+    }
+  },
+  methods: {
+    toDateil() {
+      this.$emit("toDateil");
     }
   }
 };

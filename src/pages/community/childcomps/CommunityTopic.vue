@@ -2,22 +2,26 @@
   <view class="Topic">
     <view class="flex">
       <view>
-        <image
-          src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1722396913,4133454449&fm=26&gp=0.jpg"
-          class="image"
-        />
+        <image :src="updatedShow.topicImage" class="image" />
       </view>
       <view class="flexs">
-        <view class="siae">#话题名称#</view>
-        <view>话题描述</view>
-        <view>动态：10 今日：0</view>
+        <view class="siae">#{{updatedShow.topicNane}}#</view>
+        <view>{{updatedShow.title}}</view>
+        <view>动态：{{updatedShow.today}} 今日：0</view>
       </view>
     </view>
   </view>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    updatedShow: {
+      type: Object,
+      default: () => {}
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -29,8 +33,8 @@ export default {};
   display: flex;
   padding: 32rpx 0;
 }
-.zuijing>span{
-    margin-top: 30rpx;
+.zuijing > span {
+  margin-top: 30rpx;
 }
 .flexs {
   display: flex;

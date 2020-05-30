@@ -86,7 +86,8 @@
 		{
 			"path": "pages/community/Community",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
 			}
 		},
 		{
