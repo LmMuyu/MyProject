@@ -8,13 +8,19 @@
           type="text"
           clearable
           focus
-          v-model="account"
+          v-model.trim="account"
           placeholder="请输入账号"
         ></m-input>
       </view>
       <view class="input-row">
         <text class="title">密码：</text>
-        <m-input type="password" class="size" displayable v-model="password" placeholder="请输入密码"></m-input>
+        <m-input
+          type="password"
+          class="size"
+          displayable
+          v-model.trim="password"
+          placeholder="请输入密码"
+        ></m-input>
       </view>
     </view>
     <view class="btn-row">
@@ -54,15 +60,15 @@ export default {
     return {
       providerList: [],
       hasProvider: false,
-      account: "",
-      password: "",
+      account: "1538993458",
+      password: "200216",
       positionTop: 0,
       isDevtools: false
     };
   },
   computed: mapState(["forcedLogin"]),
   methods: {
-    ...mapMutations(["login"]),
+    ...mapMutations(["login", "logininfo"]),
     initProvider() {
       const filters = ["weixin", "qq", "sinaweibo"];
       uni.getProvider({
@@ -113,12 +119,38 @@ export default {
         }
       };
 
+      //登录
       login(data)
-        .then(value => {
-          console.log(value);
+        .then(({ userinfo }) => {
+          let { token } = userinfo;
+          delete userinfo.token;
+
+          //本地缓存
+          uni.setStorage({
+            key: "token",
+            data: token
+          });
+
+          //将信息写入vuex
+          this.logininfo({
+            userinfo,
+            token
+          });
+
+          //跳转页面
+          uni.redirectTo({
+            url: "pages/file/File"
+          });
         })
-        .catch(err => {
-          console.log(err);
+        .catch(({ data }) => {
+          let { message } = data;
+
+          //登录失败弹出信息框
+          uni.showToast({
+            title: message,
+            icon: "none",
+            duration: 2000
+          });
         });
     },
     //第三方登录

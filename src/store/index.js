@@ -7,13 +7,14 @@ import mutations from "./mutations";
 Vue.use(Vuex);
 
 const state = {
-  name: "123",
   /**
    * 是否需要强制登录
    */
   forcedLogin: false,
   hasLogin: false,
   userName: "",
+  userInfo:{}, //登录用户信息
+  token:"" //用户登录的token
 };
 
 const store = new Vuex.Store({
