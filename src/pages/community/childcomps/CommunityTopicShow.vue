@@ -1,6 +1,11 @@
 <template>
   <view>
-    <CommunityTopic @click.native="toDateil" v-for="(item, index) in updated" :key="index" :updatedShow="item" />
+    <CommunityTopic
+      @click.native="toDateil(item.topicId)"
+      v-for="(item, index) in updated"
+      :key="index"
+      :updatedShow="item"
+    />
   </view>
 </template>
 
@@ -18,8 +23,8 @@ export default {
     }
   },
   methods: {
-    toDateil() {
-      this.$emit("toDateil");
+    toDateil(pid) {
+      this.$emit("toDateil",pid);
     }
   }
 };

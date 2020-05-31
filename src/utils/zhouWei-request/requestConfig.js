@@ -82,12 +82,6 @@ $http.requestEnd = function(options, resolve) {
     }
   }
   if (resolve.errMsg && resolve.statusCode && resolve.statusCode > 300) {
-    setTimeout(() => {
-      uni.showToast({
-        title: "网络错误，请检查一下网络",
-        icon: "none",
-      });
-    }, 500);
   }
 };
 //登录弹窗次数
@@ -97,7 +91,7 @@ let loginPopupNum = 0;
 $http.dataFactory = function(res) {
   // 判断接口请求是否成功
   if (res.response.statusCode && res.response.statusCode == 200) {
-		let httpData = res.response.data;
+    let httpData = res.response.data;
     /*********以下只是模板(及共参考)，需要开发者根据各自的接口返回类型修改*********/
 
     //判断数据是否请求成功

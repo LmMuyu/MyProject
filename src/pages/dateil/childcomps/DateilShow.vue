@@ -1,20 +1,25 @@
 <template>
   <view>
     <view class="flex">
-      <image
-        src="https://dss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1456753444,332302625&fm=26&gp=0.jpg"
-      />
-      <view class="font-size">#核对货物端午等哈我</view>
+      <image :src="communiftInfo.topicImage" mode="aspectFill" />
     </view>
+    <view class="font-size istext">#{{communiftInfo.title}}</view>
     <view class="text">
-      <view class="text-color-9">动态：42 今日：0</view>
+      <view class="text-color-9">动态：{{communiftInfo.dynamic}} 今日：{{communiftInfo.today}}</view>
       <view class="text-color-c">话题描述</view>
     </view>
   </view>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    communiftInfo: {
+      type: Object,
+      default: () => {}
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -38,5 +43,8 @@ export default {};
 }
 .text > view {
   padding: 16rpx 0;
+}
+.istext{
+  padding: 12rpx 0;
 }
 </style>

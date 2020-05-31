@@ -28,9 +28,6 @@ export default {
   },
   methods: {
     findPassword() {
-      /**
-       * 仅做示例
-       */
       if (this.email.length < 3 || !~this.email.indexOf("@")) {
         uni.showToast({
           icon: "none",

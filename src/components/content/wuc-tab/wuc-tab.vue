@@ -1,153 +1,160 @@
 <template>
-	<scroll-view class="wuc-tab" :class="tabClass" :style="tabStyle" scroll-with-animation scroll-x :scroll-left="scrollLeft">
-		<div v-if="!textFlex">
-			<div
-				class="wuc-tab-item scroll-com"
-				:class="[index === tabCur ? selectClass + ' cur' : '']"
-				v-for="(item, index) in tabList"
-				:key="index"
-				:id="index"
-				@tap="tabSelect(index, $event)"
-			>
-				<text :class="item.icon"></text>
-				<span class="text">{{ item.name }}</span>
-			</div>
-		</div>
+  <scroll-view
+    class="wuc-tab"
+    :class="tabClass"
+    :style="tabStyle"
+    scroll-with-animation
+    scroll-x
+    :scroll-left="scrollLeft"
+  >
+    <div v-if="!textFlex">
+      <div
+        class="wuc-tab-item scroll-com"
+        :class="[index === tabCur ? selectClass + ' cur' : '']"
+        v-for="(item, index) in tabList"
+        :key="index"
+        :id="index"
+        @tap="tabSelect(index, $event)"
+      >
+        <text :class="item.icon"></text>
+        <span class="text">{{ item.name }}</span>
+      </div>
+    </div>
 
-		<div class="flex text-center" v-if="textFlex">
-			<div
-				class="wuc-tab-item flex-sub scroll-com"
-				:class="index === tabCur ? selectClass + ' cur' : ''"
-				v-for="(item, index) in tabList"
-				:key="index"
-				:id="index"
-				@tap="tabSelect(index, $event)"
-			>
-				<text :class="item.icon"></text>
-				<span class="text">{{ item.name }}</span>
-			</div>
-		</div>
-	</scroll-view>
+    <div class="flex text-center" v-if="textFlex">
+      <div
+        class="wuc-tab-item flex-sub scroll-com"
+        :class="index === tabCur ? selectClass + ' cur' : ''"
+        v-for="(item, index) in tabList"
+        :key="index"
+        :id="index"
+        @tap="tabSelect(index, $event)"
+      >
+        <text :class="item.icon"></text>
+        <span class="text">{{ item.name }}</span>
+      </div>
+    </div>
+  </scroll-view>
 </template>
 <script>
 export default {
-	name: 'wuc-tab',
-	data() {
-		return {};
-	},
-	props: {
-		tabList: {
-			type: Array,
-			default() {
-				return [];
-			}
-		},
-		tabCur: {
-			type: Number,
-			default() {
-				return 0;
-			}
-		},
-		tabClass: {
-			type: String,
-			default() {
-				return '';
-			}
-		},
-		tabStyle: {
-			type: String,
-			default() {
-				return '';
-			}
-		},
-		textFlex: {
-			type: Boolean,
-			default() {
-				return false;
-			}
-		},
-		selectClass: {
-			type: String,
-			default() {
-				return 'text-blue';
-			}
-		}
-	},
-	methods: {
-		tabSelect(index, e) {
-			if (this.currentTab === index) return false;
-			this.$emit('update:tabCur', index);
-			this.$emit('change', index);
-		}
-	},
-	computed: {
-		scrollLeft() {
-			return (this.tabCur - 1) * 60;
-		}
-	}
+  name: "wuc-tab",
+  data() {
+    return {};
+  },
+  props: {
+    tabList: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
+    tabCur: {
+      type: Number,
+      default() {
+        return 0;
+      }
+    },
+    tabClass: {
+      type: String,
+      default() {
+        return "";
+      }
+    },
+    tabStyle: {
+      type: String,
+      default() {
+        return "";
+      }
+    },
+    textFlex: {
+      type: Boolean,
+      default() {
+        return false;
+      }
+    },
+    selectClass: {
+      type: String,
+      default() {
+        return "text-blue";
+      }
+    }
+  },
+  methods: {
+    tabSelect(index, e) {
+      if (this.currentTab === index) return false;
+      this.$emit("update:tabCur", index);
+      this.$emit("change", index);
+    }
+  },
+  computed: {
+    scrollLeft() {
+      return (this.tabCur - 1) * 60;
+    }
+  }
 };
 </script>
 <style>
 div,
 scroll-view,
 swiper {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 .wuc-tab {
-	white-space: nowrap;
+  white-space: nowrap;
 }
 .wuc-tab-item {
-	height: 70rpx;
-	display: inline-block;
-	line-height: 70rpx;
-	margin: 0 10rpx;
-	padding: 0 20rpx;
+  height: 70rpx;
+  display: inline-block;
+  line-height: 70rpx;
+  margin: 0 10rpx;
+  padding: 0 20rpx;
 }
 
 .wuc-tab-item.cur {
-	border-bottom: 4rpx solid;
+  border-bottom: 4rpx solid;
 }
 
 .wuc-tab.fixed {
-	position: fixed;
-	width: 100%;
-	top: 0;
-	z-index: 1024;
-	box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1024;
+  box-shadow: 0 1rpx 6rpx rgba(0, 0, 0, 0.1);
 }
 
 .flex {
-	display: flex;
+  display: flex;
 }
 .text-center {
-	text-align: center;
+  text-align: center;
 }
 .flex-sub {
-	flex: 1;
+  flex: 1;
 }
 .text-blue {
-	color: #0081ff;
+  color: #0081ff;
 }
 .text-white {
-	color: #ffffff;
+  color: #ffffff;
 }
 .bg-white {
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 .bg-blue {
-	background-color: #0081ff;
+  background-color: #0081ff;
 }
 .text-orange {
-	color: #f37b1d;
+  color: #f37b1d;
 }
 
 .text-xl {
-	font-size: 36rpx;
+  font-size: 36rpx;
 }
 .scroll-com {
-	display: inline-block;
+  display: inline-block;
 }
 .text {
-	font-size: 32rpx;
+  font-size: 32rpx;
 }
 </style>

@@ -39,9 +39,12 @@
 </template>
 
 <script>
-import service from "../service";
-import { mapState, mapMutations } from "vuex";
 import mInput from "components/content/m-input/m-input";
+
+import { mapState, mapMutations } from "vuex";
+import { login } from "@/utils/login";
+
+import service from "../service";
 
 export default {
   components: {
@@ -83,17 +86,10 @@ export default {
       });
     },
     initPosition() {
-      /**
-       * 使用 absolute 定位，并且设置 bottom 值进行定位。软键盘弹出时，底部会因为窗口变化而被顶上来。
-       * 反向使用 top 进行定位，可以避免此问题。
-       */
       this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
     },
+    //登录
     bindLogin() {
-      /**
-       * 客户端对账号信息进行一些必要的校验。
-       * 实际开发中，根据业务需要进行处理，这里仅做示例。
-       */
       if (this.account.length < 5) {
         uni.showToast({
           icon: "none",
@@ -108,26 +104,22 @@ export default {
         });
         return;
       }
-      /**
-       * 下面简单模拟下服务端的处理
-       * 检测用户账号密码是否在已注册的用户列表中
-       * 实际开发中，使用 uni.request 将账号信息发送至服务端，客户端在回调函数中获取结果信息。
-       */
       const data = {
-        account: this.account,
-        password: this.password
+        method: "POST",
+        option: "/login",
+        data: {
+          account: this.account,
+          password: this.password
+        }
       };
-      const validUser = service.getUsers().some(function(user) {
-        return data.account === user.account && data.password === user.password;
-      });
-      if (validUser) {
-        this.toMain(this.account);
-      } else {
-        uni.showToast({
-          icon: "none",
-          title: "用户账号或密码不正确"
+
+      login(data)
+        .then(value => {
+          console.log(value);
+        })
+        .catch(err => {
+          console.log(err);
         });
-      }
     },
     //第三方登录
     oauth(value) {

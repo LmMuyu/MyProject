@@ -1,6 +1,6 @@
 <template>
   <view>
-    <PostModule v-for="item in list" :key="item.id" :dataInfo="item" />
+    <PostModule v-for="item in list" :key="item.uid" :dataInfo="item" />
   </view>
 </template>
 

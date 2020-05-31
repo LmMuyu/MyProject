@@ -6,7 +6,7 @@
       </view>
       <view class="flexs">
         <view class="siae">#{{updatedShow.topicNane}}#</view>
-        <view>{{updatedShow.title}}</view>
+        <view class="text">{{updatedShow.title}}</view>
         <view>动态：{{updatedShow.today}} 今日：0</view>
       </view>
     </view>
@@ -28,6 +28,7 @@ export default {
 .image {
   height: 250rpx;
   width: 250rpx;
+  border-radius: 6rpx;
 }
 .flex {
   display: flex;
@@ -40,11 +41,16 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding-left: 10rpx;
 }
 .flexs > view {
   font-size: $uni-font-size-base;
 }
 .flexs > view:nth-child(1) {
   font-size: 38rpx;
+}
+.text {
+  height: 60rpx;
+  overflow: hidden;
 }
 </style>

@@ -45,8 +45,6 @@ export default {
 
       postReqData(option)
         .then(({ post }) => {
-          console.log(post);
-
           this.review = post;
         })
         .catch(err => {

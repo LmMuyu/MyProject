@@ -14,17 +14,12 @@
         <CommunityTopCategories class="topcategories" :category="category" />
         <!-- 搜索栏 -->
         <CommunitySearchBar class="searchbar" />
-        <Dividing />
         <!--轮播图-->
-        <swiper indicator-dots autoplay :interval="2500" :duration="300" style="height:350rpx">
-          <swiper-item v-for="(item, index) in swiper" :key="index">
-            <image style="width:100%" mode="aspectFill" :src="item" />
-          </swiper-item>
-        </swiper>
+        <CommunitySwiper :swiper="swiper" />
         <!--最近更新-->
-        <veiw>
+        <view>
           <span class="zuijing">最近更新</span>
-        </veiw>
+        </view>
         <CommunityTopicShow @toDateil="toDateil" :updated="updated" />
       </swiper-item>
 
@@ -46,6 +41,7 @@ import CommunityHeadText from "./childcomps/CommunityHeadText.vue";
 import CommunitySearchBar from "./childcomps/CommunitySearchBar";
 import CommunityTopicShow from "./childcomps/CommunityTopicShow";
 import CommunityPostShow from "./childcomps/CommunityPostShow";
+import CommunitySwiper from "./childcomps/CommunitySwiper";
 
 import { communityplate } from "@/utils/community";
 
@@ -53,10 +49,11 @@ export default {
   name: "Community",
   components: {
     CommunityTopCategories,
+    CommunityTopicShow,
     CommunitySearchBar,
     CommunityPostShow,
     CommunityHeadText,
-    CommunityTopicShow,
+    CommunitySwiper,
     Dividing
   },
   data() {
@@ -119,9 +116,9 @@ export default {
       this.index = i;
     },
     //跳转详情页
-    toDateil() {
+    toDateil(pid) {
       uni.navigateTo({
-        url: "../dateil/Dateil",
+        url: `../dateil/Dateil?pid=${pid}`,
         animationType: "slide-in-bottom",
         animationDuration: 200
       });
@@ -145,10 +142,12 @@ export default {
       communityplate(option, swiper)
         .then(([plate, swiper]) => {
           //轮播图数据
-          this.swiper = swiper;
+          let { swiperData } = swiper;
+          this.swiper = swiperData;
 
           //话题
           let { list } = plate;
+
           this.updated = list;
         })
         .catch(err => {
