@@ -7,7 +7,7 @@
     <view>
       <text
         class="flex-1 flex-ja-c margin-top size"
-        style="background:#bdc3c7;padding:16rpx;color:#3498db"
+        style="background:#2980b9;padding:16rpx;color:#ff7979"
         @click="test"
       >完成</text>
     </view>
@@ -100,10 +100,10 @@ export default {
 
 <style lang="scss" scoped>
 input {
+  height: 64rpx;
   border: 1rpx solid $uni-border-color;
 }
 .input {
-  padding: 8rpx;
   border-radius: $uni-border-radius-sm;
   font-size: $uni-spacing-row-lg;
 }

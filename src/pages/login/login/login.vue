@@ -27,7 +27,7 @@
       <button type="primary" class="primary classlogin" @tap="bindLogin">登录</button>
     </view>
     <view class="action-row">
-      <navigator url="../pwd/pwd" class="size">注册账号</navigator>
+      <navigator url="../reg/reg" class="size">注册账号</navigator>
       <text>|</text>
       <navigator url="../pwd/pwd" class="size">忘记密码</navigator>
     </view>
@@ -48,7 +48,7 @@
 import mInput from "components/content/m-input/m-input";
 
 import { mapState, mapMutations } from "vuex";
-import { login } from "@/utils/login";
+import { loginInfoPost, loginThirdParty } from "@/utils/login";
 
 import service from "../service";
 
@@ -94,6 +94,26 @@ export default {
     initPosition() {
       this.positionTop = uni.getSystemInfoSync().windowHeight - 100;
     },
+    //本地缓存
+    localCache(userinfo, token) {
+      //本地缓存
+      uni.setStorage({
+        key: "token",
+        data: token
+      });
+
+      //将信息写入vuex
+      this.logininfo({
+        userinfo,
+        token
+      });
+
+      //跳转页面
+      uni.reLaunch({
+        url: "../../file/File"
+      });
+    },
+
     //登录
     bindLogin() {
       if (this.account.length < 5) {
@@ -119,28 +139,13 @@ export default {
         }
       };
 
-      //登录
-      login(data)
+      //向后台发送登录信息
+      loginInfoPost(data)
         .then(({ userinfo }) => {
           let { token } = userinfo;
           delete userinfo.token;
 
-          //本地缓存
-          uni.setStorage({
-            key: "token",
-            data: token
-          });
-
-          //将信息写入vuex
-          this.logininfo({
-            userinfo,
-            token
-          });
-
-          //跳转页面
-          uni.redirectTo({
-            url: "pages/file/File"
-          });
+          this.localCache(userinfo, token);
         })
         .catch(({ data }) => {
           let { message } = data;
@@ -155,13 +160,40 @@ export default {
     },
     //第三方登录
     oauth(value) {
+      //登录
       uni.login({
         provider: value,
+        scopes: "auth_user",
         success: res => {
+          //获取用户信息
           uni.getUserInfo({
             provider: value,
-            success: infoRes => {
-              console.log(infoRes);
+            success: async ({ userInfo }) => {
+              //微信登录
+              if (value === "weixin") {
+                //向后台传参数
+                let option = {
+                  option: "/login/thirdparty",
+                  method: "POST",
+                  data: {
+                    uid: userInfo.openId,
+                    name: userInfo.nickName,
+                    avatar: userInfo.avatarUrl
+                  }
+                };
+                //请求后台等待返回信息
+                await loginThirdParty(option)
+                  .then(({ uinfo }) => {
+                    let { token } = uinfo;
+                    delete uinfo.token;
+                    
+                    //本地缓存
+                    this.localCache(uinfo, token);
+                  })
+                  .catch(err => {
+                    throw err;
+                  });
+              }
 
               /**
                * 实际开发中，获取用户信息后，需要将信息上报至服务端。
@@ -193,6 +225,8 @@ export default {
       }
     },
     toMain(userName) {
+      console.log(userName);
+
       this.login(userName);
       /**
        * 强制登录时使用reLaunch方式跳转过来

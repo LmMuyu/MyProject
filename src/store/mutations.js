@@ -12,4 +12,9 @@ export default {
     state.userInfo = { ...userinfo };
     state.token = token;
   },
+  //退出登录
+  deleteLogin(state) {
+    //清除用户信息
+    state.userInfo = {};
+  },
 };

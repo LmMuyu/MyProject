@@ -3,7 +3,7 @@
     <!--导航栏-->
     <uni-nav-bar class="navbar" right-text="设置" title="我的" @openSetup="openSetup" />
     <!--用户信息-->
-    <FileUserInfo @click.native="openLogin" />
+    <FileUserInfo @click.native="openLogin" :userInfo="userInfo" />
     <!--用户状态详细信息-->
     <FilePostInfo :info="listpost" />
     <!--广告-->
@@ -21,6 +21,8 @@ import FilePostInfo from "./childcomps/FilePostInfo";
 import FileFeatures from "./childcomps/FileFeatures";
 import FileBilling from "./childcomps/FileBilling";
 
+import { mapGetters } from "vuex";
+
 export default {
   name: "file",
   components: {
@@ -37,10 +39,30 @@ export default {
         { name: "动态", num: 0 },
         { name: "评论", num: 0 },
         { name: "粉丝", num: 0 }
-      ]
+      ],
+      token: "", //用户的token
+      userInfo: {} //登录者信息
     };
   },
+  computed: {
+    ...mapGetters(["getUserInfo"])
+  },
+  created() {
+    this.userInfo = this.getUserInfo;
+    this.getToken();
+  },
+  mounted() {},
   methods: {
+    //获取token
+    getToken() {
+      uni.getStorage({
+        key: "token",
+        success: res => {
+          this.token = res.data;
+        }
+      });
+    },
+    //打开编辑页
     openSetup() {
       uni.navigateTo({
         url: "../install/Install",
@@ -50,6 +72,9 @@ export default {
     },
     //打开登录
     openLogin() {
+      //以登陆不跳转登录页
+      if (this.token) return;
+
       uni.navigateTo({
         url: "../login/login/login",
         animationType: "none",

@@ -1,7 +1,7 @@
 import http from "./zhouWei-request/requestConfig";
 
 export function request(config) {
-  const { option, method = "GET", data, timeout = 30000 } = config;
+  const { option, method = "GET", data, timeout = 10000 } = config;
   
   return http.request({
     url: `http://192.168.43.31:3000${option}`,

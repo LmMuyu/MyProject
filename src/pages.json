@@ -28,7 +28,9 @@
 		{
 			"path": "pages/file/File",
 			"style": {
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false
+
 			}
 		},
 		{

@@ -1,12 +1,10 @@
 <template>
   <view class="flex">
-    <image
-      src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=4051190685,3300949277&fm=11&gp=0.jpg"
-      class="iamge"
-    />
+    <img src="~static/img/file/user.svg" class="iamge" v-if="userAvatar" />
+    <image :src="userInfo.avatar" class="iamge" v-else />
     <view class="text flex-1 ma-l">
-      <text class="siae">名称</text>
-      <text class="font-size">总贴子:10 进入发帖:0</text>
+      <text class="siae">{{userName}}</text>
+      <text class="font-size">{{userRelease}}</text>
     </view>
     <view class="iconfont flex-ja-c">&#xe694;</view>
   </view>
@@ -14,6 +12,23 @@
 
 <script>
 export default {
+  props: {
+    userInfo: {
+      type: Object,
+      default: () => {}
+    }
+  },
+  computed: {
+    userName() {
+      return this.userInfo.name ? this.userInfo.name : "点击登录";
+    },
+    userAvatar() {
+      return this.userInfo.avatar ? false : true;
+    },
+    userRelease() {
+      return this.userInfo.post ? `总贴子:${this.userInfo.post.length}` : "";
+    }
+  },
   methods: {}
 };
 </script>
@@ -27,6 +42,7 @@ export default {
   width: 100rpx;
   height: 100rpx;
   border-radius: 50%;
+  border: 1rpx solid $uni-border-color;
 }
 .text {
   display: flex;
