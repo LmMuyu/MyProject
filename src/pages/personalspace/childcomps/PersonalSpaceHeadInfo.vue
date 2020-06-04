@@ -1,10 +1,7 @@
 <template>
   <view class="flex">
     <view>
-      <image
-        src="https://dss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1035415831,1465727770&fm=26&gp=0.jpg"
-        mode="aspectFill"
-      />
+      <image :src="basic.avatar" mode="aspectFill" />
     </view>
     <view class="textis">
       <view class="viewis">
@@ -13,15 +10,21 @@
           <text>{{item.features}}</text>
         </view>
       </view>
-      <view class="guaz flex-ja-c size">
+      <!-- <view class="guaz flex-ja-c size" v-if="condition">
         <text>关注</text>
-      </view>
+      </view> -->
     </view>
   </view>
 </template>
 
 <script>
 export default {
+  props: {
+    basic: {
+      type: Object,
+      default: () => {}
+    }
+  },
   data() {
     return {
       info: [

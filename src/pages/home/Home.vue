@@ -92,7 +92,19 @@ export default {
   created() {
     this.homePlate();
   },
-  mounted() {},
+  mounted() {
+    //点赞模块
+    this.$bus.$on("point", async ({ info, dinaz }) => {
+      let { postId } = info;
+
+      let post = await this.tabList[this.TabCur].data.find(
+        item => item.postId === postId
+      );
+
+      //false为++ true为--
+      !dinaz ? post.like-- : post.like++;
+    });
+  },
   methods: {
     //计算滑动高度
     screenHeight() {

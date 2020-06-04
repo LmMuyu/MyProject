@@ -61,6 +61,7 @@ export default {
   border: 1rpx solid $uni-border-color;
   padding: 12rpx;
   border-radius: 10rpx;
+  height: 60rpx;
 }
 .class-name {
   width: 100rpx;

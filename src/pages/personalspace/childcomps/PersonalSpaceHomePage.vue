@@ -2,20 +2,27 @@
   <view class="flex">
     <view class="info account_info">
       <text>账号信息</text>
-      <text>UID:498448</text>
+      <text>UID:{{info.uid}}</text>
       <text>账号年龄:10</text>
     </view>
     <view class="info personal_info">
       <text>个人信息</text>
-      <text>生日:</text>
+      <text>生日:{{info.birthday?info.birthday:"保密"}}</text>
       <text>职业:</text>
-      <text>地址:</text>
+      <text>地址:{{info.address?info.address:"保密"}}</text>
     </view>
   </view>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    info: {
+      type: Object,
+      default: () => {}
+    }
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -28,7 +35,8 @@ export default {};
   display: flex;
   flex-direction: column;
 }
-.flex > view:nth-child(2),.flex > view:nth-child(1) {
+.flex > view:nth-child(2),
+.flex > view:nth-child(1) {
   border-bottom: 1rpx solid $uni-border-color;
 }
 .personal_info,

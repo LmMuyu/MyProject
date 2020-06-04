@@ -31,7 +31,10 @@
       />
     </view>
     <view class="gong-neng">
-      <view class="iconfont">&#xe654;</view>
+      <view class="iconfont" :class="{active:dinaz}" @click="point">
+        &#xe654;
+        <text class="gong_text">{{Info.like | numFliter}}</text>
+      </view>
       <view class="iconfont">&#xe65e;</view>
       <view class="iconfont">&#xe62f;</view>
       <view class="iconfont">&#xe740;</view>
@@ -53,7 +56,8 @@ export default {
   data() {
     return {
       attention: false,
-      Info: this.dataInfo
+      Info: this.dataInfo,
+      dinaz: false
     };
   },
   filters: {
@@ -64,6 +68,11 @@ export default {
         .split("-");
       let currentTime = moment(Number(date)).format("YYYY-MM-DD");
       return moment(releaseTime).from(currentTime);
+    },
+    //数字过虑
+    numFliter(val) {
+      let num = Number(val);
+      return num === 0 ? "" : num >= 99 ? `${num}+` : num;
     }
   },
   mounted() {},
@@ -75,7 +84,15 @@ export default {
     },
     //打开帖子详情页
     openPostDetail() {
-      this.$emit("openPostDetail",this.Info.postId);
+      this.$emit("openPostDetail", this.Info.postId);
+    },
+    //点赞
+    point() {
+      this.dinaz = this.dinaz ? false : true;
+      this.$bus.$emit("point", {
+        info: this.Info,
+        dinaz: this.dinaz
+      });
     }
   }
 };
@@ -86,6 +103,12 @@ image {
   width: 200rpx;
   height: 300rpx;
   margin: 0 8rpx;
+}
+.gong_text {
+  font-size: 28rpx;
+}
+.active {
+  color: #3498db;
 }
 .ispostmodule {
   border-bottom: 1rpx solid $uni-border-color;

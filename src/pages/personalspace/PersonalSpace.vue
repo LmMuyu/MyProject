@@ -1,11 +1,11 @@
 <template>
   <view>
     <!--用户信息-->
-    <PersonalSpaceHeadInfo />
+    <PersonalSpaceHeadInfo :basic="basicInfo" />
     <!--标签栏-->
     <PersonalSpaceTab @switchTab="switchTab" />
     <!--信息展示-->
-    <PersonalSpaceHomePage v-if="activeIndex === 0" />
+    <PersonalSpaceHomePage :info="basicuserinfo" v-if="activeIndex === 0" />
     <!--帖子-->
     <PersonalSpacePostShow v-else-if="activeIndex === 1" />
   </view>
@@ -29,19 +29,33 @@ export default {
   data() {
     return {
       activeIndex: 0, //切换展示区域
-      userinfo: this.getUserInfo //用户信息
+      uinfo: {} //用户信息
     };
   },
   computed: {
     ...mapGetters(["getUserInfo"]),
     basicInfo() {
       class basic {
-        constructor({avatar }) {
-          this.postnum = post.length;
+        constructor({ avatar }) {
           this.avatar = avatar;
         }
       }
+      return new basic(this.uinfo);
+    },
+    basicuserinfo() {
+      class userinfo {
+        constructor({ uid, birthday, address }) {
+          this.uid = uid;
+          this.birthday = birthday;
+          this.address = address;
+        }
+      }
+
+      return new userinfo(this.uinfo);
     }
+  },
+  mounted() {
+    this.uinfo = this.getUserInfo;
   },
   methods: {
     switchTab(i) {
