@@ -1,7 +1,7 @@
 <template>
   <view class="flex">
-    <img src="~static/img/file/user.svg" class="iamge" v-if="userAvatar" />
-    <image :src="userInfo.avatar" class="iamge" v-else />
+    <image src="~static/img/file/user.svg" class="iamge" v-if="userAvatar" @click="openPersonalSpace" />
+    <image :src="userInfo.avatar" class="iamge" v-else @click="openPersonalSpace" />
     <view class="text flex-1 ma-l">
       <text class="siae">{{userName}}</text>
       <text class="font-size">{{userRelease}}</text>
@@ -29,7 +29,12 @@ export default {
       return this.userInfo.post ? `总贴子:${this.userInfo.post.length}` : "";
     }
   },
-  methods: {}
+  methods: {
+    //打开个人空间
+    openPersonalSpace() {
+      this.$emit("openPersonalSpace", this.userInfo.uid);
+    }
+  }
 };
 </script>
 

@@ -12,6 +12,10 @@ export default {
     state.userInfo = { ...userinfo };
     state.token = token;
   },
+  //进入应用将信息导入vuex储存
+  setUserinfo(state, payload) {
+    state.userInfo = { ...payload };
+  },
   //退出登录
   deleteLogin(state) {
     //清除用户信息

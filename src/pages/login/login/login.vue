@@ -96,10 +96,16 @@ export default {
     },
     //本地缓存
     localCache(userinfo, token) {
-      //本地缓存
+      //本地缓存token
       uni.setStorage({
         key: "token",
         data: token
+      });
+
+      //本地缓存用户信息
+      uni.setStorage({
+        key: "userInfo",
+        data: userinfo
       });
 
       //将信息写入vuex
@@ -186,7 +192,7 @@ export default {
                   .then(({ uinfo }) => {
                     let { token } = uinfo;
                     delete uinfo.token;
-                    
+
                     //本地缓存
                     this.localCache(uinfo, token);
                   })

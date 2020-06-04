@@ -15,9 +15,11 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      userinfo: this.getUserInfo, //用户信息
       account: {
         accountnum: "",
         password: "",
@@ -26,73 +28,95 @@ export default {
     };
   },
   methods: {
-    examination() {
-      let inspection = {
-        accountnum(value) {
-          if (value == "123456") {
-            return true;
+    //获取用户信息
+    ...mapGetters(["getUserInfo"]),
+    //判断规则
+    loginRule() {
+      let that = this;
+      let rule = {
+        //检验旧密码
+        accountnum() {
+          if (that.account.accountnum === "") {
+            return "旧密码不能为空";
+          } else if (that.account.accountnum !== that.userinfo.account) {
+            return "旧密码不正确";
+          }
+          return true;
+        },
+        //检查新密码
+        password() {
+          if (that.account.password === "") {
+            return "新密码不能为空";
+          } else if (that.account.password === that.userinfo.account) {
+            return "新密码不能和旧密码相同";
+          } else if (that.password.length < 6) {
+            return "新密码不能小于6位";
           }
 
-          return "旧密码错误";
+          return true;
         },
-        password(value) {
-          if (value === "123456") {
-            return "不能与旧密码相同";
-          } else if (value.length < 6) {
-            return "密码个数小于6位";
-          } else {
-            return true;
-          }
-        },
-        qdingpassword(value) {
-          let that = new Vue();
-          if (value !== that.account.qdingpassword) {
-            return "密码不等";
+        //检查确定密码
+        qdingpassword() {
+          if (that.account.qdingpassword === "") {
+            return "确定密码不能为空";
+          } else if (that.account.qdingpassword !== that.account.password) {
+            return "两次密码输入不一致";
           }
 
           return true;
         }
       };
 
-      class jiancha {
+      return rule;
+    },
+    //点击完成
+    async test() {
+      let rule = await this.loginRule();
+
+      //运行登录判定
+      class inspection {
         constructor() {
           this.times = [];
         }
 
-        addfun(methods, value) {
-          this.times.push(() => {
-            return inspection[methods](value);
-          });
+        //插入规则
+        insertRule() {
+          for (const key in rule) {
+            this.times.push(() => {
+              return rule[key]();
+            });
+          }
         }
 
-        runfun() {
-          for (let i = 0; i < times.length; i++) {
-            let jieguo = this.times[i]();
+        //运行规则
+        runRule() {
+          for (const itme of this.times) {
+            let info = itme();
+            console.log(info);
 
-            if (typeof jieguo !== "boolean") {
+            if (typeof info !== "boolean") {
+              //显示错误信息框
               uni.showToast({
-                title: jieguo,
-                duration: 1000
+                title: info,
+                icon: "none",
+                duration: 2000
               });
 
-              return;
+              return false;
             }
           }
         }
       }
 
-      return new jiancha();
-    },
-    //点击完成
-    test() {
-      let obj = this.examination();
+      let newRule = new inspection();
 
-      for (const key in this.account) {
-        this.obj.addfun(key, this.account[key]);
-      }
+      //插入规则
+      await newRule.insertRule();
+      //运行规则
+      let boll = await newRule.runRule();
+      if (boll == false) return;
 
-      console.log(obj);
-      obj.runfun();
+      //发起网络请求
     }
   }
 };

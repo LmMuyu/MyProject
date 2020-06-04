@@ -1,6 +1,24 @@
 <script>
+import { mapMutations } from "vuex";
+
 export default {
-  onLaunch: function() {},
+  methods: {
+    ...mapMutations(["setUserinfo"]),
+    //调用本地缓存
+    setuserinfo() {
+      //提取上次登录用户信息，没登陆不提取
+      uni.getStorage({
+        key: "userInfo",
+        success: res => {
+          //写入vuex
+          this.setUserinfo(res.data);
+        }
+      });
+    }
+  },
+  onLaunch: function() {
+    this.setuserinfo();
+  },
   onShow: function() {},
   onHide: function() {},
   onError(err) {

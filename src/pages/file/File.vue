@@ -3,7 +3,11 @@
     <!--导航栏-->
     <uni-nav-bar class="navbar" right-text="设置" title="我的" @openSetup="openSetup" />
     <!--用户信息-->
-    <FileUserInfo @click.native="openLogin" :userInfo="userInfo" />
+    <FileUserInfo
+      @openPersonalSpace="openPersonalSpace"
+      @click.native="openLogin"
+      :userInfo="userInfo"
+    />
     <!--用户状态详细信息-->
     <FilePostInfo :info="listpost" />
     <!--广告-->
@@ -79,6 +83,14 @@ export default {
         url: "../login/login/login",
         animationType: "none",
         animationDuration: 200
+      });
+    },
+    //打开个人空间
+    openPersonalSpace(uid) {
+      if (!this.token) return;
+
+      uni.navigateTo({
+        url: `../personalspace/PersonalSpace?id=${uid}`
       });
     }
   }

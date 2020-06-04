@@ -44,9 +44,9 @@
         </pick-regions>
       </view>
     </view>
-    <veiw class="flex-1 flex-ja-c margin-top wanc" @click="okPut">
+    <view class="flex-1 flex-ja-c margin-top wanc" @click="okPut">
       <text>完成</text>
-    </veiw>
+    </view>
 
     <!--名称修改-->
     <neil-modal
