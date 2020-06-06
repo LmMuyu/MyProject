@@ -44,11 +44,11 @@ let requestNum = 0;
 $http.requestStart = function(options) {
   if (options.load) {
     if (requestNum <= 0) {
-      //打开加载动画
-      uni.showLoading({
-        title: "加载中",
-        mask: true,
-      });
+      // //打开加载动画
+      // uni.showLoading({
+      //   title: "加载中",
+      //   mask: true,
+      // });
     }
     requestNum += 1;
   }

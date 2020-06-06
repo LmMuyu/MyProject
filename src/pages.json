@@ -2,6 +2,7 @@
 	"pages": [{
 			"path": "pages/home/Home",
 			"style": {
+				"enablePullDownRefresh": false,
 				"app-plus": {
 					"pullToRefresh": {
 						"color": "#ff7675"

@@ -66,6 +66,8 @@ export default {
                 uni.removeStorage({
                   key: "token",
                   success: res => {
+                    //清除本地用户信息
+                    uni.removeStorageSync("userInfo");
                     //退出成功跳转到我的页面
                     uni.reLaunch({
                       url: "../file/File"

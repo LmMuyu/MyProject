@@ -21,7 +21,8 @@ export default {
           name: "主页"
         },
         {
-          name: "帖子"
+          name: "帖子",
+          spacetab: "post"
         },
         {
           name: "收藏"
@@ -32,9 +33,15 @@ export default {
   methods: {
     //切换tab标签栏
     switchTab(i) {
-      this.isIndex = i;
+      if (this.isIndex === i) return;
 
-      this.$emit("switchTab", i);
+      this.isIndex = i;
+      let { spacetab } = this.info[i];
+
+      this.$emit("switchTab", {
+        i,
+        spacetab
+      });
     }
   }
 };

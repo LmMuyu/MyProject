@@ -51,13 +51,18 @@ export default {
     dataInfo: {
       type: Object,
       default: () => {}
+    },
+    //登录用户的token
+    token: {
+      type: String,
+      default: () => ""
     }
   },
   data() {
     return {
       attention: false,
-      Info: this.dataInfo,
-      dinaz: false
+      Info: this.dataInfo, //帖子信息
+      dinaz: false //点赞状态切换
     };
   },
   filters: {
@@ -75,7 +80,6 @@ export default {
       return num === 0 ? "" : num >= 99 ? `${num}+` : num;
     }
   },
-  mounted() {},
   methods: {
     openSpace() {},
     //关注
@@ -89,7 +93,7 @@ export default {
     //点赞
     point() {
       this.dinaz = this.dinaz ? false : true;
-      this.$bus.$emit("point", {
+      this.$emit("point", {
         info: this.Info,
         dinaz: this.dinaz
       });

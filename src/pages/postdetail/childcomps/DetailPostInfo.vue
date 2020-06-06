@@ -23,7 +23,7 @@
       <image
         v-for="(item, index) in dataInfo.contentimage"
         :key="index"
-        mode="aspectFill"
+        mode="widthFix"
         :src="item"
         alt
       />
@@ -83,6 +83,7 @@ export default {
 .ispostmodule {
   border-bottom: 1rpx solid $uni-border-color;
   padding: 8rpx;
+  margin-bottom: 20rpx;
 }
 .img-to {
   width: 70rpx;
@@ -128,7 +129,7 @@ export default {
 }
 .content image {
   border-radius: 6rpx;
-  height: 300rpx;
+  padding: 16rpx 0;
 }
 .gong-neng {
   height: 75rpx;

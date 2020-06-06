@@ -21,4 +21,8 @@ export default {
     //清除用户信息
     state.userInfo = {};
   },
+  //添加发布帖子
+  setReleasePost(state, payload) {
+    state.releasePost = { ...payload };
+  },
 };

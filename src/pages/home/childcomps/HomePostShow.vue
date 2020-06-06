@@ -2,9 +2,10 @@
   <view>
     <PostModule
       v-for="item in list"
-      :key="item.uid"
+      :key="item.postId"
       :dataInfo="item"
       @openPostDetail="openPostDetail"
+      @point="dianPoint"
     />
   </view>
 </template>
@@ -29,7 +30,10 @@ export default {
   },
   methods: {
     openPostDetail(Pid) {
-      this.$emit("openDetail",Pid);
+      this.$emit("openDetail", Pid);
+    },
+    dianPoint(features) {
+      this.$emit("dianPoint", features);
     }
   }
 };

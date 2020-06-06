@@ -38,7 +38,7 @@ export default {
         },
         {
           features: "粉丝",
-          num: 10
+          num: 0
         }
       ]
     };

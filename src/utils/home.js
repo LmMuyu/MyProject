@@ -7,3 +7,8 @@ export async function homePlateData(config) {
 
   return data;
 }
+
+//点赞模块
+export function homeLike(config) {
+  return request(config);
+}

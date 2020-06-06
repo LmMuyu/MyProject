@@ -23,11 +23,15 @@
       </view>
       <!-- 图片展示 -->
       <view>
-        <ReleasePageImageShow :imagelist="image" />
+        <ReleasePageImageShow class="imageshow" :imagelist="image" />
       </view>
       <!--底部功能栏-->
-      <view>
-        <ReleasePageFunction class="functionbar scroll-height" @onUploadImage="onUpimg" />
+      <view class="bottomfunction">
+        <ReleasePageFunction
+          class="functionbar scroll-height"
+          @release="dianRelease"
+          @onUploadImage="onUpimg"
+        />
       </view>
     </scroll-view>
   </view>
@@ -40,6 +44,8 @@ import ReleasePageImageShow from "./childcomps/ReleasePageImageShow.vue";
 import ReleasePageFunction from "./childcomps/ReleasePageFunction.vue";
 
 import { selectorquery } from "common/selectorquery.js";
+import { releasePost } from "../../utils/releasepage";
+import { mapGetters, mapMutations } from "vuex";
 
 export default {
   name: "ReleasePage",
@@ -52,14 +58,94 @@ export default {
     return {
       content: "",
       image: [],
-      height: 0
+      height: 0,
+      uinfo: {} //用户信息
     };
   },
+  computed: {
+    ...mapGetters(["getUserInfo"])
+  },
   mounted() {
+    this.uinfo = this.getUserInfo;
+
     //获取视高
     this.xiTong();
+
+    //删除照片
+    this.$bus.$on("deleteImage", i => {
+      this.image.splice(i, 1);
+    });
   },
   methods: {
+    ...mapMutations(["setReleasePost", "setUserinfo"]),
+    //发布
+    dianRelease() {
+      //判断
+      if (this.content !== "" || this.image.length !== 0) {
+        let { name, uid, avatar } = this.uinfo;
+
+        let optiondara = {
+          name,
+          uid,
+          avatar,
+          content: this.content,
+          image: this.image,
+          date: Date.now()
+        };
+
+        let option = {
+          method: "POST",
+          option: "/releasepost",
+          data: optiondara
+        };
+
+        //显示加载中
+        uni.showLoading({
+          title: "加载中"
+        });
+
+        //向后台提交发布帖子数据
+        releasePost(option)
+          .then(({ postData, success, userinfo }) => {
+            //更新vuex里的用户信息
+            this.setUserinfo(userinfo);
+
+            //更新本地缓存信息
+            uni.setStorage({
+              key: "userInfo",
+              data: userinfo
+            });
+
+            //后台数据添加成功，关闭加载中
+            uni.hideLoading();
+
+            //弹出发布成功框
+            uni.showToast({
+              title: success,
+              icon: "none",
+              duration: 2000
+            });
+
+            //数据传入vuex
+            this.setReleasePost(postData);
+            //跳转页面
+            uni.reLaunch({
+              url: "../home/Home"
+            });
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      } else {
+        uni.showToast({
+          title: "内容或图片不能为空!",
+          icon: "none",
+          duration: 2000
+        });
+
+        return;
+      }
+    },
     onBack() {
       let that = this;
 
@@ -76,8 +162,8 @@ export default {
               that.backPage();
             } else {
               //不是,返回上一级页面并清除编辑缓存
-							that.backPage();
-							that.deleteStorage()
+              that.backPage();
+              that.deleteStorage();
             }
           }
         });
@@ -164,19 +250,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.imageshow {
+  margin-top: 40rpx;
+}
 .text {
   color: $uni-text-color;
   font-size: $uni-font-size-base;
   width: 100%;
-  height: 800rpx;
-  padding: 0 0 300rpx 0;
 }
 .functionbar {
-  position: fixed;
-  bottom: 0;
   z-index: 99;
   background-color: #ffffff;
-  box-shadow: 0 -1rpx 1rpx $uni-bg-color-mask;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  box-shadow: 1rpx 0 1rpx $uni-bg-color-mask;
 }
 .textarea-placeholder {
   height: 100%;
@@ -188,10 +277,10 @@ export default {
   position: sticky;
   background: #ffffff;
   z-index: 10;
-  top: 28rpx;
+  padding: 28rpx 0;
 }
 .uni-common-mt {
-  position: relative;
-  top: 28rpx;
+  margin-top: 28rpx;
+  height: 200rpx;
 }
 </style>

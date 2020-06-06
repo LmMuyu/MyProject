@@ -1,6 +1,6 @@
 <template>
   <view>
-    <PersonalSpacePost />
+    <PersonalSpacePost v-for="(item, index) in postData" :key="index" :dataInfo="item" />
   </view>
 </template>
 
@@ -10,6 +10,12 @@ import PersonalSpacePost from "./PersonalSpacePost";
 export default {
   components: {
     PersonalSpacePost
+  },
+  props: {
+    postData: {
+      type: Array,
+      default: () => []
+    }
   }
 };
 </script>

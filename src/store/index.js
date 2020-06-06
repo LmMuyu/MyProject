@@ -13,8 +13,9 @@ const state = {
   forcedLogin: false,
   hasLogin: false,
   userName: "",
-  userInfo:{}, //登录用户信息
-  token:"" //用户登录的token
+  userInfo: {}, //登录用户信息
+  token: "", //用户登录的token
+  releasePost: {}, //发布帖子数据
 };
 
 const store = new Vuex.Store({

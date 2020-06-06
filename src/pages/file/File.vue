@@ -57,6 +57,13 @@ export default {
   },
   mounted() {},
   methods: {
+    //更新用户信息
+    updateUserInfo() {
+      //没有登录不用更新      
+      if (!this.token) return;
+
+      this.listpost[0].num = this.userInfo.post.length;
+    },
     //获取token
     getToken() {
       uni.getStorage({
@@ -93,6 +100,9 @@ export default {
         url: `../personalspace/PersonalSpace?id=${uid}`
       });
     }
+  },
+  onShow() {
+    this.updateUserInfo();
   }
 };
 </script>
