@@ -43,6 +43,9 @@ export default {
       ]
     };
   },
+  created() {
+    this.socket();
+  },
   mounted() {
     this.$bus.$on("Send", val => {
       let arr = {
@@ -58,6 +61,10 @@ export default {
 
       this.chat.push(arr);
     });
+  },
+  methods: {
+    //启动socket.ios
+    socket() {}
   }
 };
 </script>

@@ -121,7 +121,9 @@ export default {
         count: 1,
         sizeType: ["compressed"], //可以指定是原图还是压缩图，默认二者都有
         success: res => {
-          this.image = res.tempFilePaths[0];
+          console.log(res);
+          
+          this.avatar = res.tempFilePaths[0];
         }
       });
     },
@@ -252,6 +254,8 @@ text {
   border: 1rpx solid #3498db;
 }
 .input {
+  height: 80rpx;
   padding: 16rpx 0;
 }
+
 </style>
