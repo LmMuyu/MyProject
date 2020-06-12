@@ -4,7 +4,7 @@ export function request(config) {
   const { option, method = "GET", data, timeout = 10000 } = config;
   
   return http.request({
-    url: `http://192.168.43.31:3000${option}`,
+    url: `http://192.168.1.103:3000${option}`,
     method: method, // POST、GET、PUT、DELETE，具体说明查看官方文档
     data, //参数
     timeout: timeout, // 默认 30000 说明：超时时间，单位 ms，具体说明查看官方文档

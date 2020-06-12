@@ -1,46 +1,59 @@
 <template>
   <view id="home">
-    <!-- start 导航栏 header -->
-    <header>
-      <scroll-view scroll-x class="scroll-X">
-        <WucTab
-          :tab-list="tabList"
-          tab-class="text-class"
-          :tabCur.sync="TabCur"
-          @change="tabChange"
-          class="scroll-con"
-          ref="wuctab"
-        />
-      </scroll-view>
-    </header>
-    <!-- end 导航栏 header -->
+    <!--加载中-->
+    <template v-if="loadData === 0">
+      <view></view>
+    </template>
 
-    <!--start 滑屏 article-->
-    <article>
-      <swiper :current="TabCur" :style="`height:${height}`" @change="change" class="swiper-ml">
-        <swiper-item v-for="(item, index) in tabList" :key="index" class="scrollY">
-          <scroll-view scroll-y :style="`height:${height}`" @scrolltolower="scrolltolower(index)">
-            <!-- 有数据显示 -->
-            <template v-if="!item.data.length == 0">
-              <view>
-                <HomePostShow :list="item.data" @openDetail="openDetail" @dianPoint="dianPoint" />
-                <HomeUpLoading :text="text" />
-              </view>
-            </template>
-            <!-- 有数据显示 -->
+    <!--加载成功-->
+    <template v-else-if="loadData ===1">
+      <!-- start 导航栏 header -->
+      <header>
+        <scroll-view scroll-x class="scroll-X">
+          <WucTab
+            :tab-list="tabList"
+            tab-class="text-class"
+            :tabCur.sync="TabCur"
+            @change="tabChange"
+            class="scroll-con"
+            ref="wuctab"
+          />
+        </scroll-view>
+      </header>
+      <!-- end 导航栏 header -->
 
-            <!-- 没数据显示 -->
-            <template v-else>
-              <view>
-                <HomeNullData />
-              </view>
-            </template>
-            <!-- 没数据显示 -->
-          </scroll-view>
-        </swiper-item>
-      </swiper>
-    </article>
-    <!--start 滑屏 article-->
+      <!--start 滑屏 article-->
+      <article>
+        <swiper :current="TabCur" :style="`height:${height}`" @change="change" class="swiper-ml">
+          <swiper-item v-for="(item, index) in tabList" :key="index" class="scrollY">
+            <scroll-view scroll-y :style="`height:${height}`" @scrolltolower="scrolltolower(index)">
+              <!-- 有数据显示 -->
+              <template v-if="!item.data.length == 0">
+                <view>
+                  <HomePostShow :list="item.data" @openDetail="openDetail" @dianPoint="dianPoint" />
+                  <HomeUpLoading :text="text" />
+                </view>
+              </template>
+              <!-- 有数据显示 -->
+
+              <!-- 没数据显示 -->
+              <template v-else>
+                <view>
+                  <HomeNullData />
+                </view>
+              </template>
+              <!-- 没数据显示 -->
+            </scroll-view>
+          </swiper-item>
+        </swiper>
+      </article>
+      <!--start 滑屏 article-->
+    </template>
+
+    <!--加载失败-->
+    <template v-else>
+      <view></view>
+    </template>
   </view>
 </template>
 
@@ -73,6 +86,7 @@ export default {
   },
   data() {
     return {
+      loadData: 1,
       infodata: [],
       list: [],
       TabCur: 0,
