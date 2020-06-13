@@ -1,13 +1,21 @@
 <template>
   <view>
-    <!--头部作者信息-->
-    <DetailPostInfo class="headinfo" :dataInfo="review.postData"  />
-    <!--分割线-->
-    <Dividing />
-    <!--最新评论-->
-    <DetailPostCommentList :comment="review.comment" />
-    <!--发评论-->
-    <DetailPostBottomInput class="input" />
+    <template v-if="loadData === 0">
+      <van-loading type="spinner" color="#1989fa" />
+    </template>
+    <template v-else-if="loadData === 1">
+      <!--头部作者信息-->
+      <DetailPostInfo class="headinfo" :dataInfo="review.postData" />
+      <!--分割线-->
+      <Dividing />
+      <!--最新评论-->
+      <DetailPostCommentList :comment="review.comment" />
+      <!--发评论-->
+      <DetailPostBottomInput class="input" />
+    </template>
+    <template v-else>
+      <div></div>
+    </template>
   </view>
 </template>
 
@@ -30,6 +38,7 @@ export default {
   data() {
     return {
       pid: "",
+      loadData: null,
       review: {} //数据
     };
   },
@@ -43,12 +52,17 @@ export default {
         }
       };
 
+      this.loadData = 0
+
       postReqData(option)
         .then(({ post }) => {
           this.review = post;
         })
         .catch(err => {
+          this.loadData = 3
           console.log(err);
+        }).finally(()=>{
+          this.loadData = 1
         });
     }
   },
@@ -71,7 +85,7 @@ export default {
   background: #ffffff;
   box-shadow: 1rpx 0 1rpx $uni-border-color;
 }
-.headinfo{
+.headinfo {
   background: #ffffff;
 }
 </style>

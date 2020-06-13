@@ -13,7 +13,7 @@
 
       <!--start 历史记录  -->
       <article>
-        <SerchForRecording class="margin-top" :recording="result" />
+        <SerchForRecording @deleteKeyword="deleteKeyword" class="margin-top" :recording="result" />
       </article>
       <!--end 历史记录  -->
     </template>
@@ -21,7 +21,7 @@
     <template v-else>
       <!--start 搜索结果  -->
       <scroll-view scroll-y :style="`height:${scrollH}`">
-        <SearchForShow @click="openPostDateil" :list="searchResults" />
+        <SearchForShow @openPostDateil="openPostDateil" :list="searchResults" />
         <ButtomText />
       </scroll-view>
       <!--end 搜索结果  -->
@@ -48,16 +48,26 @@ export default {
   },
   data() {
     return {
-      result: [],
-      searchResults: [],
-      scrollH: 0
+      result: [], //搜索关键字
+      searchResults: [], //搜索数据
+      scrollH: 0 //视高
     };
   },
   created() {
     //获取系统信息
     this.systemMessage();
+    this.getKeyword();
+  },
+  beforeDestroy() {
+    this.keyword();
   },
   methods: {
+    //删除搜索关键字
+    async deleteKeyword(i) {
+      await this.result.splice(i, 1);
+      //删除完后重新本地储存关键字
+      this.keyword();
+    },
     //搜索
     onSearch(text) {
       //收起软键盘
@@ -80,7 +90,7 @@ export default {
       postSearch(option)
         .then(async ({ list }) => {
           //储存搜索关键字
-          this.result.push(text);
+          !this.result.includes(text) ? this.result.push(text) : false;
 
           let listData = await list.map(({ postData }) => postData);
 
@@ -111,10 +121,21 @@ export default {
     },
     //打开帖子详细
     openPostDateil(postid) {
-			console.log(postid);
-			
-      uni.navigateBack({
+      uni.redirectTo({
         url: `../postdetail/PostDetail?pid=${postid}`
+      });
+    },
+    //本地储存搜索关键字
+    keyword() {
+      uni.setStorageSync("keyword", this.result);
+    },
+    //获取本地储存的搜索关键字
+    getKeyword() {
+      uni.getStorage({
+        key: "keyword",
+        success: ({ data }) => {
+          this.result = data;
+        }
       });
     }
   },

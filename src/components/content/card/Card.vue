@@ -57,8 +57,6 @@ export default {
   methods: {
     //打开帖子详细
     openPostDateil() {
-      console.log("111");
-      
       this.$emit("openPostDateil", this.info.postId);
     }
   }
