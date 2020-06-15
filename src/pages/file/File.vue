@@ -13,7 +13,7 @@
     <!--广告-->
     <FileBilling class="billing" />
     <!--功能区-->
-    <FileFeatures />
+    <FileFeatures @openFeatures="openFeatures" :features="features" />
   </view>
 </template>
 
@@ -45,21 +45,48 @@ export default {
         { name: "粉丝", num: 0 }
       ],
       token: "", //用户的token
-      userInfo: {} //登录者信息
+      userInfo: {}, //登录者信息
+      features: [
+        {
+          id: "tourrecord",
+          name: "游览记录"
+        }
+      ] //功能
     };
   },
   computed: {
     ...mapGetters(["getUserInfo"])
   },
+  watch: {
+    
+  },
   created() {
-    this.userInfo = this.getUserInfo;
     this.getToken();
+    this.userInfo = this.getUserInfo;
   },
   mounted() {},
   methods: {
+    //打开页面
+    openPages(path) {
+      setTimeout(() => {
+        uni.redirectTo({
+          url: path
+        });
+      }, 0);
+    },
+    //打开功能
+    openFeatures(id) {
+      switch (id) {
+        case "tourrecord":
+          this.openPages("../tourrecord/TourRecord");
+          break;
+        default:
+          break;
+      }
+    },
     //更新用户信息
     updateUserInfo() {
-      //没有登录不用更新      
+      //没有登录不用更新
       if (!this.token) return;
 
       this.listpost[0].num = this.userInfo.post.length;

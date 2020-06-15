@@ -195,6 +195,13 @@
 				"navigationBarTitleText": "详情页",
 				"enablePullDownRefresh": false
 			}
+		},
+		{
+			"path": "pages/tourrecord/TourRecord",
+			"style": {
+				"navigationBarTitleText": "游览记录",
+				"enablePullDownRefresh": false
+			}
 		}
 	],
 	"tabBar": {

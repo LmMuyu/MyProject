@@ -122,7 +122,7 @@ export default {
         sizeType: ["compressed"], //可以指定是原图还是压缩图，默认二者都有
         success: res => {
           console.log(res);
-          
+
           this.avatar = res.tempFilePaths[0];
         }
       });
@@ -154,7 +154,9 @@ export default {
     // 获取选择的地区
     getRegion(region) {
       //将地址转为字符串
-      this.region = region.map(item => item.name).join(" ");
+
+      let res = region.map(item => item.name).join(" ");
+      this.region = res;
     },
     //本地缓存
     localCache(userinfo, token) {
@@ -257,5 +259,4 @@ text {
   height: 80rpx;
   padding: 16rpx 0;
 }
-
 </style>

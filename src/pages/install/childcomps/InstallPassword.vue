@@ -30,93 +30,28 @@ export default {
   methods: {
     //获取用户信息
     ...mapGetters(["getUserInfo"]),
-    //判断规则
-    loginRule() {
-      let that = this;
-      let rule = {
-        //检验旧密码
-        accountnum() {
-          if (that.account.accountnum === "") {
-            return "旧密码不能为空";
-          } else if (that.account.accountnum !== that.userinfo.account) {
-            return "旧密码不正确";
-          }
-          return true;
-        },
-        //检查新密码
-        password() {
-          if (that.account.password === "") {
-            return "新密码不能为空";
-          } else if (that.account.password === that.userinfo.account) {
-            return "新密码不能和旧密码相同";
-          } else if (that.password.length < 6) {
-            return "新密码不能小于6位";
-          }
 
-          return true;
-        },
-        //检查确定密码
-        qdingpassword() {
-          if (that.account.qdingpassword === "") {
-            return "确定密码不能为空";
-          } else if (that.account.qdingpassword !== that.account.password) {
-            return "两次密码输入不一致";
-          }
-
-          return true;
-        }
-      };
-
-      return rule;
+    //提示信息
+    tixInfo(text) {
+      uni.showToast({
+        icon: "none",
+        title: text,
+        duration: 2000
+      });
     },
+
     //点击完成
-    async test() {
-      let rule = await this.loginRule();
+    test() {
+      let { accountnum, password, qdingpassword } = this.account;
 
-      //运行登录判定
-      class inspection {
-        constructor() {
-          this.times = [];
-        }
-
-        //插入规则
-        insertRule() {
-          for (const key in rule) {
-            this.times.push(() => {
-              return rule[key]();
-            });
-          }
-        }
-
-        //运行规则
-        runRule() {
-          for (const itme of this.times) {
-            let info = itme();
-            console.log(info);
-
-            if (typeof info !== "boolean") {
-              //显示错误信息框
-              uni.showToast({
-                title: info,
-                icon: "none",
-                duration: 2000
-              });
-
-              return false;
-            }
-          }
-        }
+      if (!(accountnum || password || qdingpassword)) {
+        this.tixInfo("不能为空");
+        return;
       }
-
-      let newRule = new inspection();
-
-      //插入规则
-      await newRule.insertRule();
-      //运行规则
-      let boll = await newRule.runRule();
-      if (boll == false) return;
-
-      //发起网络请求
+      
+      console.log(JSON.stringify(this.userinfo));
+      
+    
     }
   }
 };
